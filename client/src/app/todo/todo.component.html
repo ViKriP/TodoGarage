@@ -23,14 +23,21 @@
             </li>
         </ul>
     </nav>
-    <h3 class="text-muted" (click)="userok()">Angular Blog App </h3>
+    <h3 class="text-muted" (click)="userok()">Angular Blog App</h3>
 </header>
 
 <main role="main">
    
     <app-show-post></app-show-post>
     <app-add-post></app-add-post>
-    
+
+    <app-show-todo></app-show-todo>
+
+<div class="col-md-3 center-block" style="margin: 0 auto;">
+    <button type="button" class="btn btn-primary center-block">
+       + Add TODO List
+    </button>
+</div>
 </main>
 
 <!-- <footer class="footer">

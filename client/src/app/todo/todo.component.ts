@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonService } from '../service/common.service';
 import { Router } from '@angular/router';
 
+//import { User } from '../models/user.model';
+
 @Component({
   selector: 'app-home',
   templateUrl: './todo.component.html',
@@ -11,8 +13,10 @@ export class TodoComponent {
 
 	@ViewChild('addPost') addBtn: ElementRef;
 
-	constructor(private commonService: CommonService, private router: Router){
+  //public user : User;
 
+	constructor(private commonService: CommonService, private router: Router){
+  //this.user = new User();
 		if(!localStorage.getItem('loggedInUser')){
 			this.router.navigate(['/']);
 		}
@@ -29,7 +33,7 @@ export class TodoComponent {
 	}
   
  userok() {
-  alert( 'loggedInUser ' );
+  alert( 'loggedInUser ' /*+ this.user.username*/ );
  }
 
 

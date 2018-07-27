@@ -12,6 +12,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 import { CommonService } from './service/common.service';
 
 import { TodoComponent } from './todo/todo.component';
+import { ShowTodoComponent } from './show-todo/show-todo.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { TodoComponent } from './todo/todo.component';
     HomeComponent,
     ShowPostComponent,
     AddPostComponent,
-    TodoComponent
+    TodoComponent,
+    ShowTodoComponent
   ],
   imports: [
     BrowserModule,
