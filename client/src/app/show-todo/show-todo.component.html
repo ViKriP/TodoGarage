@@ -1,6 +1,49 @@
+        <div class="titler">
+          <a href=""><div class="calendar"></div></a>
+          <div class="icon">
+            <a href="" class="pencil"></a>
+            <a href="" class="recycle"></a>
+          </div>
+          <div class="titl">
+            <a href="#">Complete the test task for Ruby Garage</a>
+          </div>
+        </div>
+        <div class="searcher">
+          <a href="#" class="plus"></a>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Start typing here to create a task...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Add Task</button>
+            </span>
+          </div>
+        </div>
+
+        <div class="block">
+          <table>
+            <tbody>
+
+              <tr *ngFor="let post of posts">
+                <td class="tick">
+<!--                  <input type="checkbox" class="form-check-input"> -->
+                  <a href="#"></a>
+                </td>
+                <td class="border"></td>
+                <td class="what">{{post.description}}</td>
+                <td class="icon">
+			<i title="Sort" class="fas fa-sort" aria-hidden="true"></i>
+                	<i title="Edit" class="fas fa-edit" (click)="editPost(post)" aria-hidden="true"></i>
+                	<i title="Delete" class="fas fa-trash-alt" (click)="setDelete(post)" data-toggle="modal" data-target="#deleteModal" aria-hidden="true"></i>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div> 
+
 <div class="list-group">
 
         <a *ngFor="let post of posts" class="list-group-item list-group-item-action flex-column align-items-start">
+<input type="checkbox" class="form-check-input">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{post.title}}</h5>
                 <small>3 days ago</small>
@@ -12,10 +55,11 @@
             <small>read more...</small>
 
             <div>
+		<i title="Sort" class="fas fa-sort" aria-hidden="true"></i>
                 <i title="Edit" class="fas fa-edit" (click)="editPost(post)" aria-hidden="true"></i>
-                <i (click)="setDelete(post)" data-toggle="modal" data-target="#deleteModal" title="Delete" class="fas fa-trash-alt" aria-hidden="true"></i>
+                <i title="Delete" class="fas fa-trash-alt" (click)="setDelete(post)" data-toggle="modal" data-target="#deleteModal" aria-hidden="true"></i>
             </div>
-           
+
            </div>
         </a>
        
@@ -41,3 +85,5 @@
     </div>
   </div>
 </div>
+
+
