@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Post } from '../models/post.model';
+//import { Post } from '../models/post.model';
+
+import { Todolist } from '../models/todolist.model';
+import { Task } from '../models/task.model';
 
 @Injectable()
 export class ShowTodoService {
@@ -9,12 +12,20 @@ export class ShowTodoService {
 
 	}
 	
-	getAllPost(){
-		return this.http.post('/api/post/getAllPost',{})
+	getAllTodolist(){
+		return this.http.post('/api/todolist/getAllTodolist',{})
 	}
 
-	deletePost(id){
-		return this.http.post('/api/post/deletePost',{id : id})
+	deleteTodolist(id){
+		return this.http.post('/api/todolist/deleteTodolist',{id : id})
+	}
+
+	getAllTask(){
+		return this.http.post('/api/task/getAllTask',{})
+	}
+
+	deleteTask(id){
+		return this.http.post('/api/task/deleteTask',{id : id})
 	}
 
 }

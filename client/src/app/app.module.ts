@@ -14,6 +14,7 @@ import { CommonService } from './service/common.service';
 import { TodoComponent } from './todo/todo.component';
 import { ShowTodoComponent } from './show-todo/show-todo.component';
 import { AddTodolistComponent } from './add-todolist/add-todolist.component';
+import { AddTaskComponent } from './add-task/add-task.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AddTodolistComponent } from './add-todolist/add-todolist.component';
     AddPostComponent,
     TodoComponent,
     ShowTodoComponent,
-    AddTodolistComponent
+    AddTodolistComponent,
+    AddTaskComponent
   ],
   imports: [
     BrowserModule,

@@ -21,6 +21,7 @@ export class LoginComponent {
   	if(this.user.username && this.user.password) {
   		this.loginService.validateLogin(this.user).subscribe(result => {
         if(result['status'] === 'success') {
+//alert(this.user.name+" "+this.user.username);
           localStorage.setItem('loggedInUser', this.user.username);
           this.router.navigate(['/todo']);
         } else {

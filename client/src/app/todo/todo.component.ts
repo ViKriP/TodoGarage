@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonService } from '../service/common.service';
 import { Router } from '@angular/router';
 
-//import { User } from '../models/user.model';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-todo',
@@ -11,20 +11,25 @@ import { Router } from '@angular/router';
 })
 export class TodoComponent {
 
-	@ViewChild('addPost') addBtn: ElementRef;
+	@ViewChild('addTodolist') addBtnTodolist: ElementRef;
+//	@ViewChild('addTask') addBtnTask: ElementRef;
 
-  //public user : User;
+  public user : User;
 
 	constructor(private commonService: CommonService, private router: Router){
-  //this.user = new User();
+  this.user = new User();
 		if(!localStorage.getItem('loggedInUser')){
 			this.router.navigate(['/']);
 		}
 		
-		this.commonService.postEdit_Observable.subscribe(res => {
-			this.addBtn.nativeElement.click();
+		this.commonService.todolistEdit_Observable.subscribe(res => {
+			this.addBtnTodolist.nativeElement.click();
 		});
 
+/*		this.commonService.taskEdit_Observable.subscribe(res => {
+			this.addBtnTask.nativeElement.click();
+		});
+*/
 	}
 
 	logout(){
@@ -33,7 +38,7 @@ export class TodoComponent {
 	}
   
  userok() {
-  alert( 'loggedInUser ' /*+ this.user.username*/ );
+  alert( 'loggedInUser ' + this.user._id );
  }
 
 

@@ -1,11 +1,12 @@
+<div class="list-group" *ngFor="let todolist of todolists">
         <div class="titler">
-          <a href=""><div class="calendar"></div></a>
+          <div class="calendar"></div>
+          <div class="titl">{{todolist.name}}</div>
           <div class="icon">
-            <a href="" class="pencil"></a>
-            <a href="" class="recycle"></a>
-          </div>
-          <div class="titl">
-            <a href="#">Complete the test task for Ruby Garage</a>
+            <!--<a href="" class="pencil"></a>
+            <a href="" class="recycle"></a>-->
+                	<i title="Edit" class="fas fa-edit" (click)="editTodolist(todolist)" aria-hidden="true"></i>
+                	<i title="Delete" class="fas fa-trash-alt" (click)="setDeleteTodolist(todolist)" data-toggle="modal" data-target="#deleteTodolistModal" aria-hidden="true"></i>
           </div>
         </div>
         <div class="searcher">
@@ -13,7 +14,7 @@
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Start typing here to create a task...">
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Add Task</button>
+              <button #addTask class="btn btn-default" type="button" data-toggle="modal" data-target="#AddTaskModal">Add Task</button>
             </span>
           </div>
         </div>
@@ -22,25 +23,25 @@
           <table>
             <tbody>
 
-              <tr *ngFor="let post of posts">
+              <tr *ngFor="let task of tasks">
                 <td class="tick">
 <!--                  <input type="checkbox" class="form-check-input"> -->
                   <a href="#"></a>
                 </td>
                 <td class="border"></td>
-                <td class="what">{{post.description}}</td>
+                <td class="what">{{task.name}}</td>
                 <td class="icon">
 			<i title="Sort" class="fas fa-sort" aria-hidden="true"></i>
-                	<i title="Edit" class="fas fa-edit" (click)="editPost(post)" aria-hidden="true"></i>
-                	<i title="Delete" class="fas fa-trash-alt" (click)="setDelete(post)" data-toggle="modal" data-target="#deleteModal" aria-hidden="true"></i>
+                	<i title="Edit" class="fas fa-edit" (click)="editTask(task)" aria-hidden="true"></i>
+                	<i title="Delete" class="fas fa-trash-alt" (click)="setDeleteTask(task)" data-toggle="modal" data-target="#deleteTaskModal" aria-hidden="true"></i>
                 </td>
               </tr>
 
             </tbody>
           </table>
         </div> 
-
-<div class="list-group">
+</div>
+<!--<div class="list-group">
 
         <a *ngFor="let post of posts" class="list-group-item list-group-item-action flex-column align-items-start">
 <input type="checkbox" class="form-check-input">
@@ -63,14 +64,14 @@
            </div>
         </a>
        
-</div>
+</div>-->
 
 <!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteTodolistModal" tabindex="-1" role="dialog" aria-labelledby="exampleTodolistModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
+        <h5 class="modal-title" id="exampleTodolistModalLabel">Delete Todolist</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -79,8 +80,28 @@
         Are you sure ?
       </div>
       <div class="modal-footer">
-        <button #closeBtn (click)="unsetDelete()" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button (click)="deletePost()" type="button" class="btn btn-primary">Delete</button>
+        <button #closeBtnTodolist (click)="unsetDeleteTodolist()" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button (click)="deleteTodolist()" type="button" class="btn btn-primary">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleTaskModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleTaskModalLabel">Delete Task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure ?
+      </div>
+      <div class="modal-footer">
+        <button #closeBtnTask (click)="unsetDeleteTask()" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button (click)="deleteTask()" type="button" class="btn btn-primary">Delete</button>
       </div>
     </div>
   </div>

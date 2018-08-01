@@ -1,8 +1,9 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { AddTodolistService } from './add-todolist.service';
-import { Post } from '../models/post.model';
+//import { Post } from '../models/post.model';
 import { Router } from '@angular/router';
 import { CommonService } from '../service/common.service';
+import { Todolist } from '../models/todolist.model';
 
 @Component({
   selector: 'app-add-todolist',
@@ -12,31 +13,33 @@ import { CommonService } from '../service/common.service';
 })
 export class AddTodolistComponent implements OnInit {
 
-  @ViewChild('closeBtn') closeBtn: ElementRef;
-  public post : Post;
+  @ViewChild('closeBtnTodolist') closeBtnTodolist: ElementRef;
+  public todolist : Todolist;
 
   constructor(private AddTodolistService: AddTodolistService, private router: Router, private commonService: CommonService) {
-  	this.post = new Post();
+  	this.todolist = new Todolist();
   }
 
   ngOnInit(){
-    this.commonService.postEdit_Observable.subscribe(res => {
-      this.post = this.commonService.post_to_be_edited;
-      console.log('post is ', this.post._id);
+    this.commonService.todolistEdit_Observable.subscribe(res => {
+      this.todolist = this.commonService.todolist_to_be_edited;
+      console.log('todolist is ', this.todolist._id);
     });
   }
 
-  addPost() {
-  	if(this.post.title && this.post.description){
-      if(this.post._id){
-        this.AddTodolistService.updatePost(this.post).subscribe(res =>{
-          this.closeBtn.nativeElement.click();
-          this.commonService.notifyPostAddition();
+  addTodolist() {
+  	if(this.todolist.name && this.todolist.user_id){
+alert("upd - "+this.todolist.name);
+      if(this.todolist._id){
+        this.AddTodolistService.updateTodolist(this.todolist).subscribe(res =>{
+          this.closeBtnTodolist.nativeElement.click();
+          this.commonService.notifyTodolistAddition();
         });
       } else {
-        this.AddTodolistService.addPost(this.post).subscribe(res =>{
-          this.closeBtn.nativeElement.click();
-          this.commonService.notifyPostAddition();
+alert("add - "+this.todolist.name);
+        this.AddTodolistService.addTodolist(this.todolist).subscribe(res =>{
+          this.closeBtnTodolist.nativeElement.click();
+          this.commonService.notifyTodolistAddition();
         });
       }
   	} else {

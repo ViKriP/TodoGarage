@@ -1,0 +1,35 @@
+<div class="modal fade" id="AddTaskModal" tabindex="-1" role="dialog" aria-labelledby="AddTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AddTaskModalLabel">Add Task</h5>
+                <button type="button" #closeBtnTask class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+
+
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Name {{task.name}} - {{task._id}}</label>
+                        <input name="title" type="text" [(ngModel)]="task.name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
+                    </div>
+                    <div class="form-group">
+                        <label for="pr_id">id</label>
+                        <input name="project_id" type="text" [(ngModel)]="task._id" class="form-control" id="pr_id" aria-describedby="pr_id" value="id">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Status</label>
+                        <textarea name="description" [(ngModel)]="task.status" class="form-control" id="exampleInputPassword1" placeholder="Enter status">
+                        </textarea>
+                    </div>
+                   
+                    <button (click)="addTask()" type="button" class="btn btn-primary">Add</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
