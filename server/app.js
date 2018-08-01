@@ -16,7 +16,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended : false}))
 
 app.post('/api/user/login', (req, res) => {
-	mongoose.connect(url,{ useMongoClient: true }, function(err){
+	mongoose.connect(url, { useMongoClient: true }, function(err){
 		if(err) throw err;
 		User.find({
 //			id: req.body._id,
@@ -42,7 +42,7 @@ app.post('/api/user/login', (req, res) => {
 })
 
 app.post('/api/user/create', (req, res) => {
-	mongoose.connect(url, function(err){
+	mongoose.connect(url,{ useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		const user = new User({
 			name: req.body.name,
@@ -60,7 +60,7 @@ app.post('/api/user/create', (req, res) => {
 })
 
 app.post('/api/post/createPost', (req, res) => {
-	mongoose.connect(url, { useMongoClient: true }, function(err){
+	mongoose.connect(url, function(err){
 		if(err) throw err;
 		const post = new Post({
 			title: req.body.title,
@@ -119,13 +119,24 @@ app.post('/api/post/deletePost', (req, res) => {
 	});
 })
 
+/*function UserNameToId(usrName) {
+//	const user = new User({
+
+var findUser = async function (usrName) { 
+	var userId = await User.findOne(usrName)
+
+//var userId = findUser({username: usrName});
+return 	userId._id
+}	
+//	})
+}*/
 
 app.post('/api/todolist/createTodolist', (req, res) => {
 	mongoose.connect(url, { useMongoClient: true }, function(err){
 		if(err) throw err;
 		const todolist = new Todolist({
 			name: req.body.name,
-//			user_id: req.body.description
+			user_id: UserNameToId(req.body.user_id)//req.body.description
 		})
 		todolist.save((err, doc) => {
 			if(err) throw err;
@@ -207,7 +218,7 @@ app.post('/api/task/updateTask', (req, res) => {
 		if(err) throw err;
 		Task.update(
 			{_id: req.body.id },
-			{ name : req.body.name, status: req.body.status, project_id: new DBRef('projects', req.body.id) },
+			{ name : req.body.name, status: req.body.status/*, project_id: new DBRef('projects', req.body.id)*/ },
 			(err, doc) => {
 			if(err) throw err;
 			return res.status(200).json({

@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { RootComponent } from './root/root.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ShowPostComponent } from './show-post/show-post.component';
 import { AddPostComponent } from './add-post/add-post.component';
@@ -21,6 +22,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
   declarations: [
   	RootComponent,
     LoginComponent,
+    RegisterComponent,
     HomeComponent,
     ShowPostComponent,
     AddPostComponent,

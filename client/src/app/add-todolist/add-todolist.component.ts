@@ -15,9 +15,11 @@ export class AddTodolistComponent implements OnInit {
 
   @ViewChild('closeBtnTodolist') closeBtnTodolist: ElementRef;
   public todolist : Todolist;
+  public loggedUsr;
 
   constructor(private AddTodolistService: AddTodolistService, private router: Router, private commonService: CommonService) {
   	this.todolist = new Todolist();
+this.loggedUsr = this.loggedUser();
   }
 
   ngOnInit(){
@@ -28,8 +30,8 @@ export class AddTodolistComponent implements OnInit {
   }
 
   addTodolist() {
+alert("upd - "+this.todolist.user_id);
   	if(this.todolist.name && this.todolist.user_id){
-alert("upd - "+this.todolist.name);
       if(this.todolist._id){
         this.AddTodolistService.updateTodolist(this.todolist).subscribe(res =>{
           this.closeBtnTodolist.nativeElement.click();
@@ -47,4 +49,7 @@ alert("add - "+this.todolist.name);
   	}
   }
 
+	loggedUser(){
+		return localStorage.getItem('loggedInUser'); 
+	}
 }

@@ -113,9 +113,10 @@ i{
 .what {
     height: 100%;
     min-height: 50px;
-    border-right: 1px solid #e7ebea;
     color: #999999;
+    border-right: 1px solid #e7ebea;
     padding: 13px 0 16px 17px;
+    width: 100%;
 }
 
 table {

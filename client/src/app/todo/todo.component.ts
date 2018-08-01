@@ -37,9 +37,9 @@ export class TodoComponent {
 		this.router.navigate(['/']);
 	}
   
- userok() {
-  alert( 'loggedInUser ' + this.user._id );
- }
-
+	loggedUser(){
+		return localStorage.getItem('loggedInUser'); 
+		//alert(localStorage.getItem('loggedInUser'));
+	}
 
 }

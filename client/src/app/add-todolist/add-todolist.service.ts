@@ -10,22 +10,6 @@ export class AddTodolistService {
 
 	}
 	
-/*	addPost(post: Post){
-		return this.http.post('/api/post/createPost',{
-			title : post.title,
-			description : post.description
-		})
-	}
-
-	updatePost(post: Post){
-		return this.http.post('/api/post/updatePost',{
-			id: post._id,
-			title : post.title,
-			description : post.description
-		})
-	}
-*/
-
 	addTodolist(todolist: Todolist){
 		return this.http.post('/api/todolist/createTodolist',{
 			name : todolist.name,
