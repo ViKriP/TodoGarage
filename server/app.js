@@ -17,7 +17,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended : false}))
 
 app.post('/api/user/login', (req, res) => {
-	mongoose.connect(url, { useMongoClient: true }, function(err){
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		User.find({
 //			id: req.body._id,
@@ -61,7 +61,7 @@ app.post('/api/user/create', (req, res) => {
 })
 
 app.post('/api/post/createPost', (req, res) => {
-	mongoose.connect(url, function(err){
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		const post = new Post({
 			title: req.body.title,
@@ -78,7 +78,7 @@ app.post('/api/post/createPost', (req, res) => {
 })
 
 app.post('/api/post/updatePost', (req, res) => {
-	mongoose.connect(url, { useMongoClient: true }, function(err){
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		Post.update(
 			{_id: req.body.id },
@@ -94,7 +94,7 @@ app.post('/api/post/updatePost', (req, res) => {
 })
 
 app.post('/api/post/getAllPost', (req, res) => {
-	mongoose.connect(url, { useMongoClient: true } , function(err){
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		Post.find({},[],{ sort: { _id: -1 } },(err, doc) => {
 			if(err) throw err;
@@ -107,7 +107,7 @@ app.post('/api/post/getAllPost', (req, res) => {
 })
 
 app.post('/api/post/deletePost', (req, res) => {
-	mongoose.connect(url, { useMongoClient: true }, function(err){
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		Post.findByIdAndRemove(req.body.id,
 			(err, doc) => {
@@ -133,7 +133,7 @@ return 	userId._id
 }*/
 
 app.post('/api/todolist/createTodolist', (req, res) => {
-	mongoose.connect(url, { useMongoClient: true }, function(err){
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		const todolist = new Todolist({
 			name: req.body.name,
@@ -151,7 +151,7 @@ app.post('/api/todolist/createTodolist', (req, res) => {
 })
 
 app.post('/api/todolist/updateTodolist', (req, res) => {
-	mongoose.connect(url, { useMongoClient: true }, function(err){
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		Todolist.update(
 			{_id: req.body.id },
@@ -167,7 +167,7 @@ app.post('/api/todolist/updateTodolist', (req, res) => {
 })
 
 app.post('/api/todolist/getAllTodolist', (req, res) => {
-	mongoose.connect(url, { useMongoClient: true } , function(err){
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		Todolist.find({},[],{ sort: { _id: -1 } },(err, doc) => {
 			if(err) throw err;
@@ -180,7 +180,7 @@ app.post('/api/todolist/getAllTodolist', (req, res) => {
 })
 
 app.post('/api/todolist/deleteTodolist', (req, res) => {
-	mongoose.connect(url, { useMongoClient: true }, function(err){
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		Todolist.findByIdAndRemove(req.body.id,
 			(err, doc) => {
@@ -196,7 +196,7 @@ app.post('/api/todolist/deleteTodolist', (req, res) => {
 //---
 
 app.post('/api/task/createTask', (req, res) => {
-	mongoose.connect(url, { useMongoClient: true }, function(err){
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		const task = new Task({
 			name: req.body.name,
@@ -215,7 +215,7 @@ app.post('/api/task/createTask', (req, res) => {
 })
 
 app.post('/api/task/updateTask', (req, res) => {
-	mongoose.connect(url, { useMongoClient: true }, function(err){
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		Task.update(
 			{_id: req.body.id },
@@ -231,7 +231,7 @@ app.post('/api/task/updateTask', (req, res) => {
 })
 
 app.post('/api/task/getAllTask', (req, res) => {
-	mongoose.connect(url, { useMongoClient: true } , function(err){
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		Task.find({},[],{ sort: { _id: -1 } },(err, doc) => {
 			if(err) throw err;
@@ -244,7 +244,7 @@ app.post('/api/task/getAllTask', (req, res) => {
 })
 
 app.post('/api/task/deleteTask', (req, res) => {
-	mongoose.connect(url, { useMongoClient: true }, function(err){
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		Task.findByIdAndRemove(req.body.id,
 			(err, doc) => {
