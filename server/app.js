@@ -16,6 +16,12 @@ const Task = require('./model/task');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended : false}))
 
+app.use(express.static(__dirname + '/'));
+
+app.get('*', (req, res) =>{
+  res.sendFile(path.resolve(__dirname, 'index.html'));
+});
+
 app.post('/api/user/login', (req, res) => {
 	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
