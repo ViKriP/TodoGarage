@@ -28,6 +28,7 @@
     "hoek": "^5.0.3",
     "mongoose": "^5.2.9",
     "rxjs": "^6.2.2",
+    "url-parse": "^1.4.3",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -50,6 +51,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.0.1"
+    "typescript": "^3.0.1"
   }
 }
