@@ -1,6 +1,6 @@
 {
 	"/api/*": {
-		"target": "https://todogarage.herokuapp.com",
+		"target": "https://todogarage.herokuapp.com:3000",
 		"secure": "false"
 	}
 }
