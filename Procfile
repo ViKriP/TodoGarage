@@ -1,1 +1,1 @@
-web: ng serve --proxy-config proxy.conf.json
+web: ng serve --proxy-config proxy.json
