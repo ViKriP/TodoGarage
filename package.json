@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently --kill-others \"ng serve --proxy-config proxy.json\" \"node server/app.js\"",
+    "start": "ng serve",
+    "vrem": "concurrently --kill-others \"ng serve --proxy-config proxy.json\" \"node server/app.js\"",
     "loc": "concurrently --kill-others \"ng serve --proxy-config proxy-loc.json\" \"node server/app.js\"",
     "build": "ng build",
     "test": "ng test",
