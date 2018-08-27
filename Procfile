@@ -1,1 +1,1 @@
-web: ng serve --proxy-config proxy.json
+web: bundle exec rails s -p $PORT
