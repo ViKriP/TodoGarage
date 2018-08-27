@@ -16,12 +16,12 @@ const Task = require('./model/task');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended : false}))
 
-/*app.use(express.static(__dirname + '/'));
+app.use(express.static(__dirname + '/'));
 
 app.get('*', (req, res) =>{
   res.sendFile(path.resolve(__dirname, 'index.html'));
 });
-*/
+
 app.post('/api/user/login', (req, res) => {
 	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
@@ -268,5 +268,5 @@ app.post('/api/task/deleteTask', (req, res) => {
 //app.listen(3000, () => console.log('TodoLists server running on port 3000!'))
 
 app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  console.log("Express server listening on port %d in %s mode dir %s", this.address().port, app.settings.env, __dirname);
 });
