@@ -1,6 +1,6 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const app = express()
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
 const mongoose = require('mongoose');
 //const url = 'mongodb://localhost/blogDb';
 const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
@@ -13,8 +13,8 @@ const Post = require('./model/post');
 const Todolist = require('./model/todolist');
 const Task = require('./model/task');
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended : false}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended : false}));
 
 app.use(express.static(__dirname + '/'));
 
