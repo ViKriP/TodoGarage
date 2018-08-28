@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({ extended : false}));
 app.use(express.static(__dirname + '/'));
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
   res.sendFile(path.resolve('../' + __dirname, 'index.html'));
+  res.send('Hello World!');
 });
 /*
 app.get('*', (req, res) =>{
