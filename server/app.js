@@ -4,8 +4,6 @@ const app = express();
 const mongoose = require('mongoose');
 //const url = 'mongodb://localhost/blogDb';
 const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
-//const DBRef = require("mongoose-dbref");
-//const BSON = require('mongodb').pure().BSON;
 //const ObjectID = require('mongodb').ObjectID;
 
 const User = require('./model/user');
