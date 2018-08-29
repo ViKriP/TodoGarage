@@ -6,10 +6,7 @@ const mongoose = require('mongoose');
 const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
 //const ObjectID = require('mongodb').ObjectID;
 
-/* Подключаем Zone.js для сервера */
-//require('zone.js/dist/zone-node');
 //const ngUniversal = require('@nguniversal/express-engine');
-//const appServer = require('./server/main.bundle');
 
 const User = require('./server/model/user');
 const Post = require('./server/model/post');
@@ -32,42 +29,6 @@ app.get('/', function (req, res) {
 const port = process.env.PORT || 3000;
 
 app.set('port', port);
-
-//app.use(express.static(__dirname + '/'));
-//app.use(express.static(__dirname + '/dist'));
-
-/*app.get('/', function (req, res) {
-//  res.sendFile(path.resolve('../' + __dirname, 'index.html'));
-  res.send('Hello World!');
-});
-
-app.get('*', (req, res) =>{
-  res.sendFile(path.resolve(__dirname, 'index.html'));
-});
-*/
-
-/*function angularRouter(req, res) {
-  res.render('index', { req, res });
-}*/
-
-/* Направляем роут в корень нашего приложения*/
-//app.get('/', angularRouter);
-
-/* Отдаем статические файлы генерируемые CLI  (index.html, CSS? JS, assets...) */
-//app.use(express.static(`${__dirname}/dist`));
-
-/*Конфигурируем движок Angular Express */
-/*app.engine('html', ngUniversal.ngExpressEngine({
-  bootstrap: appServer.AppServerModuleNgFactory
-}));
-app.set('view engine', 'html');
-app.set('views', 'dist');
-*/
-
-/* Direct all routes to index.html, where Angular will take care of routing */
-//app.get('*', angularRouter);
-//app.post('*', angularRouter);
-
 
 
 app.post('/api/user/login', (req, res) => {
