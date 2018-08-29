@@ -4,13 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently --kill-others \"node server/app.js\" \"ng serve --proxy-config proxy.json\"",
-    "loc": "concurrently --kill-others \"ng serve --proxy-config proxy-loc.json\" \"node server/app.js\"",
-    "build": "ng build",
+    "start": "concurrently --kill-others \"node server.js\" \"ng serve --proxy-config proxy.json\"",
+    "loc": "concurrently --kill-others \"node server.js\" \"ng serve --proxy-config proxy-loc.json\"",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {

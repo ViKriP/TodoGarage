@@ -6,16 +6,16 @@ const mongoose = require('mongoose');
 const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
 //const ObjectID = require('mongodb').ObjectID;
 
-const User = require('./model/user');
-const Post = require('./model/post');
-const Todolist = require('./model/todolist');
-const Task = require('./model/task');
+const User = require('./server/model/user');
+const Post = require('./server/model/post');
+const Todolist = require('./server/model/todolist');
+const Task = require('./server/model/task');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false}));
 
 //app.use(express.static(__dirname + '/'));
-app.use(express.static(__dirname + '/dist'));
+//app.use(express.static(__dirname + '/dist'));
 
 /*app.get('/', function (req, res) {
 //  res.sendFile(path.resolve('../' + __dirname, 'index.html'));
@@ -26,6 +26,19 @@ app.get('*', (req, res) =>{
   res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 */
+
+function angularRouter(req, res) {
+
+  res.render('index', { req, res });
+
+}
+
+/* Направляем роут в корень нашего приложения*/
+app.get('/', angularRouter);
+
+/* Отдаем статические файлы генерируемые CLI  (index.html, CSS? JS, assets...) */
+app.use(express.static(`${__dirname}/dist`));
+
 
 app.post('/api/user/login', (req, res) => {
 	mongoose.connect(url, { useNewUrlParser: true }, function(err){
