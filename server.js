@@ -7,9 +7,9 @@ const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarag
 //const ObjectID = require('mongodb').ObjectID;
 
 /* Подключаем Zone.js для сервера */
-require('zone.js/dist/zone-node');
-const ngUniversal = require('@nguniversal/express-engine');
-const appServer = require('./server/main.bundle');
+//require('zone.js/dist/zone-node');
+//const ngUniversal = require('@nguniversal/express-engine');
+//const appServer = require('./server/main.bundle');
 
 const User = require('./server/model/user');
 const Post = require('./server/model/post');
@@ -18,6 +18,20 @@ const Task = require('./server/model/task');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false}));
+
+const path = require('path');
+//const http = require('http');
+
+app.use(express.static(path.join(__dirname, '/dist')));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+//  res.send('Hello World!');
+});
+
+const port = process.env.PORT || 3000;
+
+app.set('port', port);
 
 //app.use(express.static(__dirname + '/'));
 //app.use(express.static(__dirname + '/dist'));
@@ -32,26 +46,27 @@ app.get('*', (req, res) =>{
 });
 */
 
-function angularRouter(req, res) {
+/*function angularRouter(req, res) {
   res.render('index', { req, res });
-}
+}*/
 
 /* Направляем роут в корень нашего приложения*/
-app.get('/', angularRouter);
+//app.get('/', angularRouter);
 
 /* Отдаем статические файлы генерируемые CLI  (index.html, CSS? JS, assets...) */
-app.use(express.static(`${__dirname}/dist`));
+//app.use(express.static(`${__dirname}/dist`));
 
 /*Конфигурируем движок Angular Express */
-app.engine('html', ngUniversal.ngExpressEngine({
+/*app.engine('html', ngUniversal.ngExpressEngine({
   bootstrap: appServer.AppServerModuleNgFactory
 }));
 app.set('view engine', 'html');
 app.set('views', 'dist');
+*/
 
 /* Direct all routes to index.html, where Angular will take care of routing */
-app.get('*', angularRouter);
-app.post('*', angularRouter);
+//app.get('*', angularRouter);
+//app.post('*', angularRouter);
 
 
 
@@ -300,6 +315,6 @@ app.post('/api/task/deleteTask', (req, res) => {
 
 //app.listen(3000, () => console.log('TodoLists server running on port 3000!'))
 
-app.listen(process.env.PORT || 3000, function(){
+app.listen(port, function(){
   console.log("Express server listening on port %d in %s mode dir %s", this.address().port, app.settings.env, __dirname);
 });
