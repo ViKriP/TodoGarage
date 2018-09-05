@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Todolist } from '../models/todolist.model';
 import { Task } from '../models/task.model';
-import { User } from '../models/user.model';
+//import { User } from '../models/user.model';
 
 @Injectable()
 export class ShowTodoService {
@@ -13,7 +13,7 @@ export class ShowTodoService {
 
 	}
 
-	LoginUsr(user: User) {
+	LoginUsr() {
 		return this.http.post('/api/user/getUser',{})		
 	}
 	
