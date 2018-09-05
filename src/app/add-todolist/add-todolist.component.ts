@@ -50,6 +50,6 @@ alert("add - "+this.todolist.name);
   }
 
 	loggedUser(){
-		return localStorage.getItem('loggedInUser'); 
+		return localStorage.getItem('loggedInUserId'); 
 	}
 }

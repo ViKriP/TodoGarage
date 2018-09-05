@@ -4,12 +4,17 @@ import { HttpClient } from '@angular/common/http';
 
 import { Todolist } from '../models/todolist.model';
 import { Task } from '../models/task.model';
+import { User } from '../models/user.model';
 
 @Injectable()
 export class ShowTodoService {
 
 	constructor(private http: HttpClient){
 
+	}
+
+	LoginUsr(user: User) {
+		return this.http.post('/api/user/getUser',{})		
 	}
 	
 	getAllTodolist(){

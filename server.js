@@ -2,8 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
-//const url = 'mongodb://localhost/blogDb';
-const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
+const url = 'mongodb://localhost/blogDb';
+//const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
+
 //const ObjectID = require('mongodb').ObjectID;
 
 //const ngUniversal = require('@nguniversal/express-engine');
@@ -22,8 +23,8 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, '/dist')));
 
 app.get('/', function (req, res) {
+  //res.send('Hello World!');
   res.sendFile(path.join(__dirname, 'dist/index.html'));
-//  res.send('Hello World!');
 });
 
 const port = process.env.PORT || 3000;
@@ -35,8 +36,8 @@ app.post('/api/user/login', (req, res) => {
 	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		User.find({
-//			id: req.body._id,
-//			name: req.body.name, 
+			//_id: req.body._id,
+			//name: req.body.name, 
 			username : req.body.username, 
 			password : req.body.password
 		}, function(err, user){
@@ -56,6 +57,21 @@ app.post('/api/user/login', (req, res) => {
 		})
 	});
 })
+
+
+app.post('/api/user/getUser', (req, res) => {
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
+		if(err) throw err;
+		User.find({username : req.body.username},[],{ sort: { _id: 1 } },(err, doc) => {
+			if(err) throw err;
+			return res.status(200).json({
+				status: 'success',
+				data: doc
+			})
+		})
+	});
+})
+
 
 app.post('/api/user/create', (req, res) => {
 	mongoose.connect(url,{ useNewUrlParser: true }, function(err){

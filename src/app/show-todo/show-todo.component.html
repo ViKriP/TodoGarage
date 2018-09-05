@@ -24,11 +24,14 @@
             <tbody>
 
               <tr *ngFor="let task of tasks">
-                <td class="tick">
-<!--                  <input type="checkbox" class="form-check-input"> -->
-                  <a href="#"></a>
+                <td>
+                <!--<td class="tick">
+                  <a href="#"></a>-->
+			<div class="tick">
+				<input type="checkbox" class="form-check-input"> 
+			</div>
                 </td>
-                <td class="border"></td>
+                <td class="borderred"></td>
                 <td class="what">{{task.name}}</td>
                 <td class="icon">
 			<i title="Sort" class="fas fa-sort" aria-hidden="true"></i>
@@ -41,6 +44,16 @@
           </table>
         </div> 
 </div>
+
+<div class="list-group" *ngFor="let loginusr of loginusrs">
+<p>{{loginusr._id}}</p>
+<p>{{loginusr.name}}</p>
+<p>{{loginusr.username}}</p>
+<p>{{loginusr.password}}</p>
+
+</div>
+
+
 <!--<div class="list-group">
 
         <a *ngFor="let post of posts" class="list-group-item list-group-item-action flex-column align-items-start">

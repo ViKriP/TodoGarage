@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   public user : User;
+  public loginusrs : any [];
 
   constructor(private loginService: LoginService, private router: Router) {
   	this.user = new User();
@@ -21,8 +22,16 @@ export class LoginComponent {
   	if(this.user.username && this.user.password) {
   		this.loginService.validateLogin(this.user).subscribe(result => {
         if(result['status'] === 'success') {
-//alert(this.user.name+" "+this.user.username);
+
+//var menu = result['data'];
+//for (var key in this.user) {
+//  alert( "Ключ: " + key + " значение: " + this.user[key] );
+//}
+//alert(result['data']);
+//alert("name - "+this.user.name+" username - "+this.user.username+" password - "+ this.user.password);
+
           localStorage.setItem('loggedInUser', this.user.username);
+          localStorage.setItem('loggedInUserId', this.user._id);
           this.router.navigate(['/todo']);
         } else {
           alert('Wrong username password');
@@ -39,6 +48,12 @@ export class LoginComponent {
 		this.router.navigate(['/register']);
 	}
   
-
+	LoginUsr() {
+  	this.loginService.LoginUsr().subscribe(result => {
+  		console.log('result usr is ', result);
+  		this.loginusrs = result['data'];
+  	});
+		
+	}
 
 }

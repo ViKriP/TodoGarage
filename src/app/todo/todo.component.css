@@ -43,6 +43,22 @@ h2 {
   text-align: center;
 }
 
+.plusblue {
+	color: #34496e;
+	font-size: 30px;
+	font-weight: bold;
+	text-shadow: -1px -1px #7f819b, 0 1px 0 #8589c9;
+	margin-right: 5px;
+}
+
+.todolist {
+	background-color: #4373af;
+	text-shadow: -1px -1px #000, 0 1px 0 #444;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+
 /* Customize container */
 @media (min-width: 48em) {
   .container {

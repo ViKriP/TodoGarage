@@ -11,11 +11,12 @@ export class LoginService {
 	
 	validateLogin(user: User){
 		return this.http.post('/api/user/login',{
-//			id: user._id,
-//			name : user.name,
 			username : user.username,
 			password : user.password
 		})
 	}
 
+	LoginUsr() {
+		return this.http.post('/api/user/getUser',{})		
+	}
 }

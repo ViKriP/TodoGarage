@@ -12,3 +12,9 @@
 	<button class="btn btn-lg btn-primary btn-block" (click)="validateLogin();" type="button">Sign in</button>
 <button (click)="signup()" type="button" class="btn btn-link">sign up</button>
 </form>
+
+<a  class="list-group" *ngFor="let loginusr of loginusrs">
+<p>{{loginusr.name}}</p>
+<p>{{loginusr.username}}</p>
+<p>{{loginusr.password}}</p>
+</a>

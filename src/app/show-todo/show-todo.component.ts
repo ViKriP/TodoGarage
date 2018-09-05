@@ -25,6 +25,10 @@ export class ShowTodoComponent implements OnInit {
   public tasks : any [];
   public task_to_delete;
 
+  public loginusrs : any [];
+  //public task_to_delete;
+
+
   constructor(private showTodoService: ShowTodoService, private commonService: CommonService) {
   	
 		this.commonService.taskEdit_Observable.subscribe(res => {
@@ -36,12 +40,16 @@ export class ShowTodoComponent implements OnInit {
   ngOnInit(){
   	this.getAllTask();
   	this.getAllTodolist();
+	this.LoginUsr();
 
     this.commonService.todolistAdded_Observable.subscribe(res => {
       this.getAllTodolist();
     });
     this.commonService.taskAdded_Observable.subscribe(res => {
       this.getAllTask();
+    });
+    this.commonService.loginusrAdded_Observable.subscribe(res => {
+      this.LoginUsr();
     });
   }
 
@@ -70,6 +78,15 @@ export class ShowTodoComponent implements OnInit {
       this.closeBtnTodolist.nativeElement.click();
     })
   }
+
+//----
+	LoginUsr(){
+  	this.showTodoService.LoginUsr().subscribe(result => {
+  		console.log('result usr is ', result);
+  		this.loginusrs = result['data'];
+  	});
+		
+	}
 
 //----
   setDeleteTask(task: Task){

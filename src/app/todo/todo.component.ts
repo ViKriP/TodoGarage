@@ -34,6 +34,7 @@ export class TodoComponent {
 
 	logout(){
 		localStorage.removeItem('loggedInUser');
+		localStorage.removeItem('loggedInUserId');
 		this.router.navigate(['/']);
 	}
   
