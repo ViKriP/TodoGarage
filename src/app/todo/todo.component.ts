@@ -35,12 +35,16 @@ export class TodoComponent {
 	logout(){
 		localStorage.removeItem('loggedInUser');
 		localStorage.removeItem('loggedInUserId');
+		localStorage.removeItem('loggedInUserName');
 		this.router.navigate(['/']);
 	}
   
 	loggedUser(){
 		return localStorage.getItem('loggedInUser'); 
-		//alert(localStorage.getItem('loggedInUser'));
+	}
+
+	loggedUserName(){
+		return localStorage.getItem('loggedInUserName'); 
 	}
 
 }

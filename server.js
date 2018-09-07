@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
-//const url = 'mongodb://localhost/blogDb';
-const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
+const url = 'mongodb://localhost/blogDb';
+//const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
 
 //const ObjectID = require('mongodb').ObjectID;
 
@@ -62,7 +62,8 @@ app.post('/api/user/login', (req, res) => {
 app.post('/api/user/getUser', (req, res) => {
 	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
-		User.find({username : req.body.username},[],{ sort: { _id: 1 } },(err, doc) => {
+//		User.find({},[],{ sort: { _id: 1 } },(err, doc) => {
+		User.find({},[],{ sort: { _id: 1 } },(err, doc) => {
 			if(err) throw err;
 			return res.status(200).json({
 				status: 'success',
@@ -81,11 +82,11 @@ app.post('/api/user/create', (req, res) => {
 			username: req.body.username,
 			password: req.body.password
 		})
-		user.save((err, res) => {
+		user.save((err, doc) => {
 			if(err) throw err;
 			return res.status(200).json({
 				status: 'success',
-				data: res
+				data: doc
 			})
 		})
 	});
@@ -200,7 +201,7 @@ app.post('/api/todolist/updateTodolist', (req, res) => {
 app.post('/api/todolist/getAllTodolist', (req, res) => {
 	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
-		Todolist.find({},[],{ sort: { _id: -1 } },(err, doc) => {
+		Todolist.find({user_id: req.body.id},[],{ sort: { _id: -1 } },(err, doc) => {
 			if(err) throw err;
 			return res.status(200).json({
 				status: 'success',

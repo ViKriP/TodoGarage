@@ -23,15 +23,13 @@ export class LoginComponent {
   		this.loginService.validateLogin(this.user).subscribe(result => {
         if(result['status'] === 'success') {
 
-//var menu = result['data'];
-//for (var key in this.user) {
-//  alert( "Ключ: " + key + " значение: " + this.user[key] );
-//}
-//alert(result['data']);
+console.log('result UsrLogIn_Name is ', result['data'][0]['_id']);
+
 //alert("name - "+this.user.name+" username - "+this.user.username+" password - "+ this.user.password);
 
           localStorage.setItem('loggedInUser', this.user.username);
-          localStorage.setItem('loggedInUserId', this.user._id);
+          localStorage.setItem('loggedInUserId', result['data'][0]['_id']);
+          localStorage.setItem('loggedInUserName', result['data'][0]['name']);
           this.router.navigate(['/todo']);
         } else {
           alert('Wrong username password');

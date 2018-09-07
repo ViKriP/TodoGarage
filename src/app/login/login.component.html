@@ -1,7 +1,7 @@
 <form class="form-signin">
      <h2 class="form-signin-heading">Please sign in</h2>
-     <label for="inputEmail" class="sr-only">Email address</label>
-        <input name="email" [(ngModel)] = "user.username" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+     <label for="inputEmail" class="sr-only">Login</label>
+        <input name="email" [(ngModel)] = "user.username" type="email" id="inputEmail" class="form-control" placeholder="Login" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input name="password" [(ngModel)] = "user.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <div class="checkbox">
@@ -9,12 +9,12 @@
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-	<button class="btn btn-lg btn-primary btn-block" (click)="validateLogin();" type="button">Sign in</button>
+	<button class="btn btn-lg btn-primary btn-block btn-todo" (click)="validateLogin();" type="button">Sign in</button>
 <button (click)="signup()" type="button" class="btn btn-link">sign up</button>
 </form>
 
-<a  class="list-group" *ngFor="let loginusr of loginusrs">
+<div  class="list-group" *ngFor="let loginusr of loginusrs">
 <p>{{loginusr.name}}</p>
 <p>{{loginusr.username}}</p>
 <p>{{loginusr.password}}</p>
-</a>
+</div>

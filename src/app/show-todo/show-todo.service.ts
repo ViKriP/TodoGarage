@@ -17,8 +17,10 @@ export class ShowTodoService {
 		return this.http.post('/api/user/getUser',{})		
 	}
 	
-	getAllTodolist(){
-		return this.http.post('/api/todolist/getAllTodolist',{})
+	getAllTodolist(id){
+//console.log('res ', localStorage.getItem('loggedInUserId'));
+//console.log('result id is ', id);
+		return this.http.post('/api/todolist/getAllTodolist',{id : id})
 	}
 
 	deleteTodolist(id){

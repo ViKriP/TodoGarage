@@ -17,7 +17,7 @@
                 </button>
             </li> -->
             <li class="nav-item">
-		<p>{{loggedUser()}}</p>
+		<p style="margin: 0px;">{{loggedUserName()}}&nbsp;({{loggedUser()}})</p>
                  <button (click)="logout()" type="button" class="btn btn-link">
                   Logout
                 </button>
@@ -40,7 +40,7 @@
     <app-add-task></app-add-task>
 
 <div style="text-align: center;">
-    <button #addTodolist type="button" class="btn btn-primary center-block todolist" data-toggle="modal" data-target="#AddTodolistModal"><b class="plusblue">+</b>Add TODO List
+    <button #addTodolist type="button" class="btn btn-primary center-block btn-todo" data-toggle="modal" data-target="#AddTodolistModal"><b class="plusblue">+</b>Add TODO List
     </button>
        
 </div>

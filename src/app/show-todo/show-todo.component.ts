@@ -62,8 +62,8 @@ export class ShowTodoComponent implements OnInit {
   }
 
   getAllTodolist(){
-  	this.showTodoService.getAllTodolist().subscribe(result => {
-  		console.log('result is ', result);
+  	this.showTodoService.getAllTodolist(localStorage.getItem('loggedInUserId')).subscribe(result => {
+  		console.log('result id ', result);
   		this.todolists = result['data'];
   	});
   }
@@ -82,7 +82,7 @@ export class ShowTodoComponent implements OnInit {
 //----
 	LoginUsr(){
   	this.showTodoService.LoginUsr().subscribe(result => {
-  		console.log('result usr is ', result);
+  		//console.log('result usr is ', result);
   		this.loginusrs = result['data'];
   	});
 		
