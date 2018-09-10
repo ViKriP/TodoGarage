@@ -19,34 +19,35 @@ export class AddTodolistComponent implements OnInit {
 
   constructor(private AddTodolistService: AddTodolistService, private router: Router, private commonService: CommonService) {
   	this.todolist = new Todolist();
-this.loggedUsr = this.loggedUser();
+	this.loggedUsr = this.loggedUser();
   }
 
   ngOnInit(){
     this.commonService.todolistEdit_Observable.subscribe(res => {
       this.todolist = this.commonService.todolist_to_be_edited;
-      console.log('todolist is ', this.todolist._id);
+//      console.log('todolist is ', this.todolist);
     });
   }
 
   addTodolist() {
-alert("upd - "+this.todolist.user_id);
-  	if(this.todolist.name && this.todolist.user_id){
-      if(this.todolist._id){
-        this.AddTodolistService.updateTodolist(this.todolist).subscribe(res =>{
-          this.closeBtnTodolist.nativeElement.click();
-          this.commonService.notifyTodolistAddition();
-        });
-      } else {
-alert("add - "+this.todolist.name);
-        this.AddTodolistService.addTodolist(this.todolist).subscribe(res =>{
-          this.closeBtnTodolist.nativeElement.click();
-          this.commonService.notifyTodolistAddition();
-        });
-      }
-  	} else {
-  		alert('Title and Description required');
-  	}
+	this.todolist.user_id = localStorage.getItem('loggedInUserId');
+	console.log('todolist is ', this.todolist, this.todolist.name, this.todolist._id);
+	if(this.todolist.name && this.todolist.user_id){
+		if(this.todolist._id){
+			this.AddTodolistService.updateTodolist(this.todolist).subscribe(res =>{
+				this.closeBtnTodolist.nativeElement.click();
+				this.commonService.notifyTodolistAddition();
+			});
+		} else {
+			//alert("add - "+this.todolist.name);
+			this.AddTodolistService.addTodolist(this.todolist).subscribe(res =>{
+				this.closeBtnTodolist.nativeElement.click();
+				this.commonService.notifyTodolistAddition();
+			});
+		}
+	} else {
+		alert('Title and Description required');
+	}
   }
 
 	loggedUser(){

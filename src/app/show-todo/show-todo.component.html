@@ -9,15 +9,21 @@
                 	<i title="Delete" class="fas fa-trash-alt" (click)="setDeleteTodolist(todolist)" data-toggle="modal" data-target="#deleteTodolistModal" aria-hidden="true"></i>
           </div>
         </div>
+
+	<!--<form>
+	<div class="form-group">-->
         <div class="searcher">
           <a href="/todo" class="plus"></a>
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Start typing here to create a task...">
             <span class="input-group-btn">
               <button #addTask class="btn btn-default" type="button" data-toggle="modal" data-target="#AddTaskModal">Add Task</button>
+              <!--<button  (click)="addTask()" class="btn btn-default" type="button">Add Task</button>-->
             </span>
           </div>
         </div>
+	<!--</div>
+	</form>-->
 
         <div class="block">
           <table>
@@ -45,13 +51,13 @@
         </div> 
 </div>
 
-<div class="list-group" *ngFor="let loginusr of loginusrs">
+<!--<div class="list-group" *ngFor="let loginusr of loginusrs">
 <p>{{loginusr._id}}</p>
 <p>{{loginusr.name}}</p>
 <p>{{loginusr.username}}</p>
 <p>{{loginusr.password}}</p>
 
-</div>
+</div>-->
 
 
 <!--<div class="list-group">

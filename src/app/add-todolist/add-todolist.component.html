@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="AddTodolistModalLabel">Add Todolist {{loggedUser()}}</h5>
+                <h5 class="modal-title" id="AddTodolistModalLabel">Add Todolist</h5>
                 <button type="button" #closeBtnTodolist class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -15,15 +15,13 @@
                         <label for="exampleInputEmail1">Name</label>
                         <input name="title" type="text" [(ngModel)]="todolist.name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter title">
                     </div>
-                    <div class="form-group"><p>{{loggedUsr}}</p>
-			<input type="hidden" name="user_id" [(ngModel)]="loggedUsr">
+                    <!--<div class="form-group"><p>{{loggedUsr}}</p>
+			<input type="hidden" name="user_id" class="form-control" [(ngModel)]="loggedUsr">-->
 
                         <!--<label for="exampleInputPassword1">Description</label>
                         <textarea name="description" [(ngModel)]="todolist.user_id" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        </textarea>-->
-                    </div>
-
-                   
+                        </textarea>
+                    </div>-->
 
                     <button (click)="addTodolist()" type="button" class="btn btn-primary">Add</button>
                 </form>

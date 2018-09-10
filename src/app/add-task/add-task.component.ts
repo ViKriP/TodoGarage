@@ -30,23 +30,23 @@ export class AddTaskComponent implements OnInit {
   }
 
   addTask() {
-  	if(this.task.name && this.task.status){
-      if(this.task._id){
-alert("upd - "+this.task.name);
-        this.addTaskService.updateTask(this.task).subscribe(res =>{
-          this.closeBtnTask.nativeElement.click();
-          this.commonService.notifyTaskAddition();
-        });
-      } else {
-alert("add - "+this.task.name);
-        this.addTaskService.addTask(this.task).subscribe(res =>{
-          this.closeBtnTask.nativeElement.click();
-          this.commonService.notifyTaskAddition();
-        });
-      }
-  	} else {
-  		alert('Title and Description required');
-  	}
+	if(this.task.name && this.task.status){
+		if(this.task._id){
+		//alert("upd - "+this.task.name);
+			this.addTaskService.updateTask(this.task).subscribe(res =>{
+				this.closeBtnTask.nativeElement.click();
+				this.commonService.notifyTaskAddition();
+			});
+		} else {
+		//alert("add - "+this.task.name);
+			this.addTaskService.addTask(this.task).subscribe(res =>{
+				this.closeBtnTask.nativeElement.click();
+				this.commonService.notifyTaskAddition();
+			});
+		}
+	} else {
+		alert('Name required');
+	}
   }
 
 }

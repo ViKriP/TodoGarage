@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost/blogDb';
-//const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
+//const url = 'mongodb://localhost/blogDb';
+const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
 
 //const ObjectID = require('mongodb').ObjectID;
 
@@ -169,7 +169,7 @@ app.post('/api/todolist/createTodolist', (req, res) => {
 		if(err) throw err;
 		const todolist = new Todolist({
 			name: req.body.name,
-			user_id: UserNameToId(req.body.user_id)//req.body.description
+			user_id: req.body.user_id //UserNameToId(req.body.user_id) //req.body.description
 		})
 		todolist.save((err, doc) => {
 			if(err) throw err;
@@ -233,6 +233,7 @@ app.post('/api/task/createTask', (req, res) => {
 		const task = new Task({
 			name: req.body.name,
 			status: req.body.status,
+			projec_id: req.body.project_id
 //			project_id: (req.body.description) new DBRef('tanks', req.body.project_id)}
 		})
 		task.save((err, doc) => {
@@ -251,7 +252,7 @@ app.post('/api/task/updateTask', (req, res) => {
 		if(err) throw err;
 		Task.update(
 			{_id: req.body.id },
-			{ name : req.body.name, status: req.body.status/*, project_id: new DBRef('projects', req.body.id)*/ },
+			{ name : req.body.name, status: req.body.status, projec_id: req.body.project_id /*, project_id: new DBRef('projects', req.body.id)*/ },
 			(err, doc) => {
 			if(err) throw err;
 			return res.status(200).json({

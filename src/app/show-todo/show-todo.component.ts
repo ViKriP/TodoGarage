@@ -63,7 +63,7 @@ export class ShowTodoComponent implements OnInit {
 
   getAllTodolist(){
   	this.showTodoService.getAllTodolist(localStorage.getItem('loggedInUserId')).subscribe(result => {
-  		console.log('result id ', result);
+  		//console.log('result id ', result);
   		this.todolists = result['data'];
   	});
   }
@@ -99,7 +99,7 @@ export class ShowTodoComponent implements OnInit {
 
   getAllTask(){
   	this.showTodoService.getAllTask().subscribe(result => {
-  		console.log('result is ', result);
+  		//console.log('result is ', result);
   		this.tasks = result['data'];
   	});
   }
