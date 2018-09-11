@@ -31,6 +31,10 @@ export class ShowTodoService {
 		return this.http.post('/api/task/getAllTask',{})
 	}
 
+	getAllTask2(id){
+		return this.http.post('/api/task/getAllTask2',{id : id})
+	}
+
 	deleteTask(id){
 		return this.http.post('/api/task/deleteTask',{id : id})
 	}

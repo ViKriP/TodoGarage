@@ -23,7 +23,7 @@ export class LoginComponent {
   		this.loginService.validateLogin(this.user).subscribe(result => {
         if(result['status'] === 'success') {
 
-console.log('result UsrLogIn_Name is ', result['data'][0]['_id']);
+//console.log('result UsrLogIn_Name is ', result['data'][0]['_id']);
 
 //alert("name - "+this.user.name+" username - "+this.user.username+" password - "+ this.user.password);
 
@@ -48,7 +48,7 @@ console.log('result UsrLogIn_Name is ', result['data'][0]['_id']);
   
 	LoginUsr() {
   	this.loginService.LoginUsr().subscribe(result => {
-  		console.log('result usr is ', result);
+  		//console.log('result usr is ', result);
   		this.loginusrs = result['data'];
   	});
 		

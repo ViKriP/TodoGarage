@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
-//const url = 'mongodb://localhost/blogDb';
-const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
+const url = 'mongodb://localhost/blogDb';
+//const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
 
 //const ObjectID = require('mongodb').ObjectID;
 
@@ -267,6 +267,19 @@ app.post('/api/task/getAllTask', (req, res) => {
 	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		Task.find({},[],{ sort: { _id: -1 } },(err, doc) => {
+			if(err) throw err;
+			return res.status(200).json({
+				status: 'success',
+				data: doc
+			})
+		})
+	});
+})
+
+app.post('/api/task/getAllTask2', (req, res) => {
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
+		if(err) throw err;
+		Task.find({project_id: req.body.id},[],{ sort: { _id: -1 } },(err, doc) => {
 			if(err) throw err;
 			return res.status(200).json({
 				status: 'success',

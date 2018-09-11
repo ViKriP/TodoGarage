@@ -38,16 +38,16 @@ export class ShowTodoComponent implements OnInit {
   }
 
   ngOnInit(){
-  	this.getAllTask();
+//  	this.getAllTask();
   	this.getAllTodolist();
 	this.LoginUsr();
 
     this.commonService.todolistAdded_Observable.subscribe(res => {
       this.getAllTodolist();
     });
-    this.commonService.taskAdded_Observable.subscribe(res => {
+/*    this.commonService.taskAdded_Observable.subscribe(res => {
       this.getAllTask();
-    });
+    });*/
     this.commonService.loginusrAdded_Observable.subscribe(res => {
       this.LoginUsr();
     });
@@ -63,7 +63,7 @@ export class ShowTodoComponent implements OnInit {
 
   getAllTodolist(){
   	this.showTodoService.getAllTodolist(localStorage.getItem('loggedInUserId')).subscribe(result => {
-  		//console.log('result id ', result);
+  		console.log('result todolist is ', result);
   		this.todolists = result['data'];
   	});
   }
@@ -104,13 +104,21 @@ export class ShowTodoComponent implements OnInit {
   	});
   }
 
+  getAllTask2(proj_id){
+  		//console.log('result is ', proj_id);
+  	this.showTodoService.getAllTask2(proj_id).subscribe(result => {
+  		//console.log('result is ', result);
+  		this.tasks = result['data'];
+  	});
+  }
+
   editTask(task: Task){
     this.commonService.setTaskToEdit(task);
   }
 
   deleteTask(){
     this.showTodoService.deleteTask(this.task_to_delete._id).subscribe(res => {
-      this.getAllTask();
+////      this.getAllTask();
       this.closeBtnTask.nativeElement.click();
     })
   }

@@ -1,9 +1,9 @@
-<div class="list-group" *ngFor="let todolist of todolists">
+<div class="list-group" *ngFor="let todolist of todolists"> 
         <div class="titler">
           <div class="calendar"></div>
           <div class="titl">{{todolist.name}}</div>
           <div class="icon">
-            <!--<a href="" class="pencil"></a>
+            <!--<a href="" class="pencil"></a>{{getAllTask2(todolist._id)}}
             <a href="" class="recycle"></a>-->
                 	<i title="Edit" class="fas fa-edit" (click)="editTodolist(todolist)" aria-hidden="true"></i>
                 	<i title="Delete" class="fas fa-trash-alt" (click)="setDeleteTodolist(todolist)" data-toggle="modal" data-target="#deleteTodolistModal" aria-hidden="true"></i>
@@ -11,7 +11,7 @@
         </div>
 
 	<!--<form>
-	<div class="form-group">-->
+	<div class="form-group"> {{todolist.project_id}} (click)=getAllTask2(todolist._id)-->
         <div class="searcher">
           <a href="/todo" class="plus"></a>
           <div class="input-group">
@@ -29,7 +29,7 @@
           <table>
             <tbody>
 
-              <tr *ngFor="let task of tasks">
+              <tr *ngFor="let task of todolist.tasks">
                 <td>
                 <!--<td class="tick">
                   <a href="#"></a>-->
