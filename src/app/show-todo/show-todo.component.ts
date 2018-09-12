@@ -28,13 +28,15 @@ export class ShowTodoComponent implements OnInit {
   public loginusrs : any [];
   //public task_to_delete;
 
+  public task : Task;
 
   constructor(private showTodoService: ShowTodoService, private commonService: CommonService) {
   	
 		this.commonService.taskEdit_Observable.subscribe(res => {
 			this.addBtnTask.nativeElement.click();
 		});
-
+  		
+		this.task = new Task();
   }
 
   ngOnInit(){
@@ -123,5 +125,35 @@ export class ShowTodoComponent implements OnInit {
     })
   }
 
+ /* addTask(){
+	console.log('addTask result is ', task.name);
+ }*/
+  addTask() {
+console.log('addTask result is ', this.task._id);
+		if(this.task.name){
+			this.addTaskService.addTask(this.task).subscribe(res =>{
+				this.closeBtnTask.nativeElement.click();
+				this.commonService.notifyTaskAddition();
+			});
+	} else {
+		alert('Name -Task- required');
+	}
+
+/*	if(this.task.name && this.task.status){
+		if(this.task._id){
+			this.addTaskService.updateTask(this.task).subscribe(res =>{
+				//this.closeBtnTask.nativeElement.click();
+				//this.commonService.notifyTaskAddition();
+			});
+		} else {
+			this.addTaskService.addTask(this.task).subscribe(res =>{
+				this.closeBtnTask.nativeElement.click();
+				this.commonService.notifyTaskAddition();
+			});
+		}
+	} else {
+		alert('Name required');
+	}*/
+  }
 
 }

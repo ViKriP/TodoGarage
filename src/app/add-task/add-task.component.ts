@@ -25,11 +25,12 @@ export class AddTaskComponent implements OnInit {
   ngOnInit(){
     this.commonService.taskEdit_Observable.subscribe(res => {
       this.task = this.commonService.task_to_be_edited;
-      console.log('task is ', this.task._id);
+      //console.log('task is ', this.task._id);
     });
   }
 
   addTask() {
+//console.log('addTask result is ', this.task.name);
 	if(this.task.name && this.task.status){
 		if(this.task._id){
 		//alert("upd - "+this.task.name);

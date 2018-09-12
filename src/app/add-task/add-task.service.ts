@@ -16,7 +16,7 @@ export class AddTaskService {
 		return this.http.post('/api/task/createTask',{
 			name : task.name,
 			status : task.status,
-			project_id: task.project_id
+			//project_id: task.project_id
 		})
 	}
 
@@ -26,7 +26,7 @@ export class AddTaskService {
 			id: task._id,
 			name : task.name,
 			status : task.status,
-			project_id: task._id
+			//project_id: task._id
 		})
 	}
 

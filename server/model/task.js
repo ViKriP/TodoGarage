@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 // create a schema
 const taskSchema = new Schema({
   name: { type: String, required: true },
-  status: { type: String, required: true },
-  project_id: [{  type: Schema.ObjectId, ref: 'projects' }]
+  status: { type: String, required: true }
 }, { collection : 'tasks' });
 
 const Task = mongoose.model('Task', taskSchema);

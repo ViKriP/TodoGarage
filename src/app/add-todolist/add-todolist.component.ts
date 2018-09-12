@@ -31,7 +31,7 @@ export class AddTodolistComponent implements OnInit {
 
   addTodolist() {
 	this.todolist.user_id = localStorage.getItem('loggedInUserId');
-	console.log('todolist is ', this.todolist, this.todolist.name, this.todolist._id);
+	//console.log('todolist is ', this.todolist, this.todolist.name, this.todolist._id);
 	if(this.todolist.name && this.todolist.user_id){
 		if(this.todolist._id){
 			this.AddTodolistService.updateTodolist(this.todolist).subscribe(res =>{

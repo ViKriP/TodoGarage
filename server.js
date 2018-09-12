@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost/blogDb';
+const url = 'mongodb://localhost/todogarage';
 //const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
 
 //const ObjectID = require('mongodb').ObjectID;
@@ -233,10 +233,11 @@ app.post('/api/task/createTask', (req, res) => {
 		const task = new Task({
 			name: req.body.name,
 			status: req.body.status,
-			projec_id: req.body.project_id
+//			projec_id: req.body.project_id
 //			project_id: (req.body.description) new DBRef('tanks', req.body.project_id)}
 		})
-		task.save((err, doc) => {
+//Todolist.update({_id : req.body.id}, {$set: {tasks : 300}})
+		/*todolist.tasks*/task.save((err, doc) => {
 			if(err) throw err;
 			return res.status(200).json({
 				status: 'success',
@@ -252,7 +253,7 @@ app.post('/api/task/updateTask', (req, res) => {
 		if(err) throw err;
 		Task.update(
 			{_id: req.body.id },
-			{ name : req.body.name, status: req.body.status, projec_id: req.body.project_id /*, project_id: new DBRef('projects', req.body.id)*/ },
+			{ name : req.body.name, status: req.body.status /*, projec_id: req.body.project_id, project_id: new DBRef('projects', req.body.id)*/ },
 			(err, doc) => {
 			if(err) throw err;
 			return res.status(200).json({

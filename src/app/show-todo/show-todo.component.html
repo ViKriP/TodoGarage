@@ -15,10 +15,10 @@
         <div class="searcher">
           <a href="/todo" class="plus"></a>
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Start typing here to create a task...">
+            <input type="text" class="form-control" placeholder="Start typing here to create a task..." (keyup.enter)="addTask();" [(ngModel)]="task.name">
             <span class="input-group-btn">
-              <button #addTask class="btn btn-default" type="button" data-toggle="modal" data-target="#AddTaskModal">Add Task</button>
-              <!--<button  (click)="addTask()" class="btn btn-default" type="button">Add Task</button>-->
+              <!--<button #addTask class="btn btn-default" type="button" data-toggle="modal" data-target="#AddTaskModal">Add Task</button>-->
+              <button (click)="addTask()" class="btn btn-default" type="button">Add Task</button>
             </span>
           </div>
         </div>

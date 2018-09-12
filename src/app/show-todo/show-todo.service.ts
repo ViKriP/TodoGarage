@@ -39,4 +39,14 @@ export class ShowTodoService {
 		return this.http.post('/api/task/deleteTask',{id : id})
 	}
 
+	addTask(task: Task){
+//alert("ok");
+		return this.http.post('/api/task/createTask',{
+			name : task.name,
+			status : "0",
+			//project_id: task.project_id
+		})
+	}
+
+
 }
