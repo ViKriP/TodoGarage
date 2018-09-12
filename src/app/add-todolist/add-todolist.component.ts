@@ -25,13 +25,11 @@ export class AddTodolistComponent implements OnInit {
   ngOnInit(){
     this.commonService.todolistEdit_Observable.subscribe(res => {
       this.todolist = this.commonService.todolist_to_be_edited;
-//      console.log('todolist is ', this.todolist);
     });
   }
 
   addTodolist() {
 	this.todolist.user_id = localStorage.getItem('loggedInUserId');
-	//console.log('todolist is ', this.todolist, this.todolist.name, this.todolist._id);
 	if(this.todolist.name && this.todolist.user_id){
 		if(this.todolist._id){
 			this.AddTodolistService.updateTodolist(this.todolist).subscribe(res =>{

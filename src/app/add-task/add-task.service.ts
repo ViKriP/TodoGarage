@@ -11,22 +11,12 @@ export class AddTaskService {
 
 	}
 	
-	addTask(task: Task){
-//alert("ok");
-		return this.http.post('/api/task/createTask',{
-			name : task.name,
-			status : task.status,
-			//project_id: task.project_id
-		})
-	}
-
 	updateTask(task: Task){
-//alert("upd - "+task.name);
 		return this.http.post('/api/task/updateTask',{
 			id: task._id,
 			name : task.name,
-			status : task.status,
-			//project_id: task._id
+			stat : task.status,
+			project_id: task.project_id
 		})
 	}
 

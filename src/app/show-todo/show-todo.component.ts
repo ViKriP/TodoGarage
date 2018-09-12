@@ -17,7 +17,7 @@ export class ShowTodoComponent implements OnInit {
   @ViewChild('closeBtnTodolist') closeBtnTodolist: ElementRef;
   @ViewChild('closeBtnTask') closeBtnTask: ElementRef;
 
-  @ViewChild('addTask') addBtnTask: ElementRef;
+  //@ViewChild('addTask') addBtnTask: ElementRef;
 
   public todolists : any [];
   public todolist_to_delete;
@@ -26,17 +26,19 @@ export class ShowTodoComponent implements OnInit {
   public task_to_delete;
 
   public loginusrs : any [];
-  //public task_to_delete;
 
   public task : Task;
+  public TaskCheck;
 
   constructor(private showTodoService: ShowTodoService, private commonService: CommonService) {
   	
-		this.commonService.taskEdit_Observable.subscribe(res => {
+		/*this.commonService.taskEdit_Observable.subscribe(res => {
 			this.addBtnTask.nativeElement.click();
-		});
+		});*/
   		
 		this.task = new Task();
+
+console.log('show-todo constr - ok - ', this.task.name);
   }
 
   ngOnInit(){
@@ -47,9 +49,13 @@ export class ShowTodoComponent implements OnInit {
     this.commonService.todolistAdded_Observable.subscribe(res => {
       this.getAllTodolist();
     });
-/*    this.commonService.taskAdded_Observable.subscribe(res => {
+    /*this.commonService.taskAdded_Observable.subscribe(res => {
       this.getAllTask();
     });*/
+    this.commonService.taskEdit_Observable.subscribe(res => {
+      this.task = this.commonService.task_to_be_edited;
+      console.log('task is ngOnInit - ok - ', this.task.name);
+    });
     this.commonService.loginusrAdded_Observable.subscribe(res => {
       this.LoginUsr();
     });
@@ -84,14 +90,14 @@ export class ShowTodoComponent implements OnInit {
 //----
 	LoginUsr(){
   	this.showTodoService.LoginUsr().subscribe(result => {
-  		//console.log('result usr is ', result);
   		this.loginusrs = result['data'];
   	});
 		
 	}
 
 //----
-  setDeleteTask(task: Task){
+  setDeleteTask(task: Task, proj_id){
+	task.project_id = proj_id;
     this.task_to_delete = task;
   }
 
@@ -101,59 +107,39 @@ export class ShowTodoComponent implements OnInit {
 
   getAllTask(){
   	this.showTodoService.getAllTask().subscribe(result => {
-  		//console.log('result is ', result);
   		this.tasks = result['data'];
   	});
   }
 
   getAllTask2(proj_id){
-  		//console.log('result is ', proj_id);
   	this.showTodoService.getAllTask2(proj_id).subscribe(result => {
-  		//console.log('result is ', result);
   		this.tasks = result['data'];
   	});
   }
 
-  editTask(task: Task){
-    this.commonService.setTaskToEdit(task);
+  editTask(task: Task, proj_id){
+	task.project_id = proj_id;
+	this.commonService.setTaskToEdit(task);
   }
 
   deleteTask(){
-    this.showTodoService.deleteTask(this.task_to_delete._id).subscribe(res => {
-////      this.getAllTask();
+    this.showTodoService.deleteTask(this.task_to_delete).subscribe(res => {
+	this.getAllTodolist();
+	console.log('Task_DEL - ', res)
       this.closeBtnTask.nativeElement.click();
     })
   }
 
- /* addTask(){
-	console.log('addTask result is ', task.name);
- }*/
-  addTask() {
-console.log('addTask result is ', this.task._id);
-		if(this.task.name){
-			this.addTaskService.addTask(this.task).subscribe(res =>{
-				this.closeBtnTask.nativeElement.click();
-				this.commonService.notifyTaskAddition();
-			});
+  addTask(TodoListId) {
+	this.task.project_id = TodoListId; 
+	if(this.task.name){
+		this.showTodoService.addTask(this.task).subscribe(res =>{
+			this.closeBtnTask.nativeElement.click();
+			this.commonService.notifyTodolistAddition();
+		});
 	} else {
 		alert('Name -Task- required');
 	}
-
-/*	if(this.task.name && this.task.status){
-		if(this.task._id){
-			this.addTaskService.updateTask(this.task).subscribe(res =>{
-				//this.closeBtnTask.nativeElement.click();
-				//this.commonService.notifyTaskAddition();
-			});
-		} else {
-			this.addTaskService.addTask(this.task).subscribe(res =>{
-				this.closeBtnTask.nativeElement.click();
-				this.commonService.notifyTaskAddition();
-			});
-		}
-	} else {
-		alert('Name required');
-	}*/
   }
 
 }

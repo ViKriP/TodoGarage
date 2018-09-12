@@ -15,10 +15,10 @@
         <div class="searcher">
           <a href="/todo" class="plus"></a>
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Start typing here to create a task..." (keyup.enter)="addTask();" [(ngModel)]="task.name">
+            <input type="text" class="form-control" placeholder="Start typing here to create a task..." (keyup.enter)="addTask(todolist._id);" [(ngModel)]="task.name">
             <span class="input-group-btn">
               <!--<button #addTask class="btn btn-default" type="button" data-toggle="modal" data-target="#AddTaskModal">Add Task</button>-->
-              <button (click)="addTask()" class="btn btn-default" type="button">Add Task</button>
+              <button (click)="addTask(todolist._id)" class="btn btn-default" type="button">Add Task</button>
             </span>
           </div>
         </div>
@@ -29,7 +29,7 @@
           <table>
             <tbody>
 
-              <tr *ngFor="let task of todolist.tasks">
+              <tr *ngFor="let TodoListTask of todolist.tasks" >
                 <td>
                 <!--<td class="tick">
                   <a href="#"></a>-->
@@ -38,11 +38,11 @@
 			</div>
                 </td>
                 <td class="borderred"></td>
-                <td class="what">{{task.name}}</td>
+                <td class="what" [style.text-decoration]="line-through==true?'none':'none'">{{TodoListTask.name}}</td>
                 <td class="icon">
 			<i title="Sort" class="fas fa-sort" aria-hidden="true"></i>
-                	<i title="Edit" class="fas fa-edit" (click)="editTask(task)" aria-hidden="true"></i>
-                	<i title="Delete" class="fas fa-trash-alt" (click)="setDeleteTask(task)" data-toggle="modal" data-target="#deleteTaskModal" aria-hidden="true"></i>
+                	<i title="Edit" class="fas fa-edit" (click)="editTask(TodoListTask, todolist._id)" aria-hidden="true" data-toggle="modal" data-target="#AddTaskModal"> <!--#addTask data-toggle="modal" data-target="#AddTaskModal"--></i>
+                	<i title="Delete" class="fas fa-trash-alt" (click)="setDeleteTask(TodoListTask, todolist._id)" data-toggle="modal" data-target="#deleteTaskModal" aria-hidden="true"></i>
                 </td>
               </tr>
 

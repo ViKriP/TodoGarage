@@ -23,10 +23,6 @@ export class LoginComponent {
   		this.loginService.validateLogin(this.user).subscribe(result => {
         if(result['status'] === 'success') {
 
-//console.log('result UsrLogIn_Name is ', result['data'][0]['_id']);
-
-//alert("name - "+this.user.name+" username - "+this.user.username+" password - "+ this.user.password);
-
           localStorage.setItem('loggedInUser', this.user.username);
           localStorage.setItem('loggedInUserId', result['data'][0]['_id']);
           localStorage.setItem('loggedInUserName', result['data'][0]['name']);
@@ -48,7 +44,6 @@ export class LoginComponent {
   
 	LoginUsr() {
   	this.loginService.LoginUsr().subscribe(result => {
-  		//console.log('result usr is ', result);
   		this.loginusrs = result['data'];
   	});
 		

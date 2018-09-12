@@ -18,8 +18,6 @@ export class ShowTodoService {
 	}
 	
 	getAllTodolist(id){
-//console.log('res ', localStorage.getItem('loggedInUserId'));
-//console.log('result id is ', id);
 		return this.http.post('/api/todolist/getAllTodolist',{id : id})
 	}
 
@@ -35,16 +33,18 @@ export class ShowTodoService {
 		return this.http.post('/api/task/getAllTask2',{id : id})
 	}
 
-	deleteTask(id){
-		return this.http.post('/api/task/deleteTask',{id : id})
+	deleteTask(TaskList){
+		return this.http.post('/api/task/deleteTask',{
+			id : TaskList._id,
+			project_id : TaskList.project_id
+		})
 	}
 
 	addTask(task: Task){
-//alert("ok");
 		return this.http.post('/api/task/createTask',{
 			name : task.name,
 			status : "0",
-			//project_id: task.project_id
+			project_id: task.project_id
 		})
 	}
 
