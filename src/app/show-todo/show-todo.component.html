@@ -13,8 +13,8 @@
 	<!--<form>
 	<div class="form-group"> {{todolist.project_id}} (click)=getAllTask2(todolist._id)-->
         <div class="searcher">
-          <a href="/todo" class="plus"></a>
-          <div class="input-group">
+          <div class="plus"></div>
+          <div class="input-group" style="width: auto;">
             <input type="text" class="form-control" placeholder="Start typing here to create a task..." #TaskName (keyup.enter)="addTask(todolist._id, TaskName.value)">
             <span class="input-group-btn">
               <!--<button #addTask class="btn btn-default" type="button" data-toggle="modal" data-target="#AddTaskModal">Add Task</button> [(ngModel)]="task.name"-->
