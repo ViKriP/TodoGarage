@@ -12,8 +12,8 @@
 
                 <form>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Name</label>
-                        <input name="title" type="text" [(ngModel)]="todolist.name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter title">
+                        <label for="TodolistName">Name</label>
+                        <input name="title" type="text" [(ngModel)]="todolist.name" class="form-control" id="TodolistName" aria-describedby="emailHelp" placeholder="Enter name Todolist" (keyup.enter)="addTodolist()">
                     </div>
 
                     <button (click)="addTodolist()" type="button" class="btn btn-primary">Add</button>

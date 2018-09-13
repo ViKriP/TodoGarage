@@ -28,7 +28,7 @@ export class ShowTodoComponent implements OnInit {
   public loginusrs : any [];
 
   public task : Task;
-  public TaskCheck;
+  //public TaskCheck;
 
   constructor(private showTodoService: ShowTodoService, private commonService: CommonService) {
   	
@@ -37,8 +37,6 @@ export class ShowTodoComponent implements OnInit {
 		});*/
   		
 		this.task = new Task();
-
-console.log('show-todo constr - ok - ', this.task.name);
   }
 
   ngOnInit(){
@@ -54,7 +52,7 @@ console.log('show-todo constr - ok - ', this.task.name);
     });*/
     this.commonService.taskEdit_Observable.subscribe(res => {
       this.task = this.commonService.task_to_be_edited;
-      console.log('task is ngOnInit - ok - ', this.task.name);
+      //console.log('task is ngOnInit - ok - ', this.task.name);
     });
     this.commonService.loginusrAdded_Observable.subscribe(res => {
       this.LoginUsr();
@@ -71,7 +69,7 @@ console.log('show-todo constr - ok - ', this.task.name);
 
   getAllTodolist(){
   	this.showTodoService.getAllTodolist(localStorage.getItem('loggedInUserId')).subscribe(result => {
-  		console.log('result todolist is ', result);
+  		//console.log('result todolist is ', result);
   		this.todolists = result['data'];
   	});
   }
@@ -122,15 +120,40 @@ console.log('show-todo constr - ok - ', this.task.name);
 	this.commonService.setTaskToEdit(task);
   }
 
+  editTaskCheck(checked, task: Task, proj_id){
+    if(checked){
+	task.status = "1";
+	this.editTask(task, proj_id);
+this.updTaskCheck();
+    }else{
+	task.status = "0";
+	this.editTask(task, proj_id)
+this.updTaskCheck();
+    }
+  }
+
+  updTaskCheck(){
+	if(this.task._id){
+		this.showTodoService.updateTask(this.task).subscribe(res =>{
+			//this.closeBtnTask.nativeElement.click();
+			this.commonService.notifyTodolistAddition();
+		});
+	} else {
+		alert('Name required');
+	}
+
+  }
+
   deleteTask(){
     this.showTodoService.deleteTask(this.task_to_delete).subscribe(res => {
 	this.getAllTodolist();
-	console.log('Task_DEL - ', res)
+	//console.log('Task_DEL - ', res)
       this.closeBtnTask.nativeElement.click();
     })
   }
 
-  addTask(TodoListId) {
+  addTask(TodoListId, TskName) {
+	this.task.name = TskName; 
 	this.task.project_id = TodoListId; 
 	if(this.task.name){
 		this.showTodoService.addTask(this.task).subscribe(res =>{

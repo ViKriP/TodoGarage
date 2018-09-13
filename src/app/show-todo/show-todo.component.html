@@ -15,10 +15,10 @@
         <div class="searcher">
           <a href="/todo" class="plus"></a>
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Start typing here to create a task..." (keyup.enter)="addTask(todolist._id);" [(ngModel)]="task.name">
+            <input type="text" class="form-control" placeholder="Start typing here to create a task..." #TaskName (keyup.enter)="addTask(todolist._id, TaskName.value)">
             <span class="input-group-btn">
-              <!--<button #addTask class="btn btn-default" type="button" data-toggle="modal" data-target="#AddTaskModal">Add Task</button>-->
-              <button (click)="addTask(todolist._id)" class="btn btn-default" type="button">Add Task</button>
+              <!--<button #addTask class="btn btn-default" type="button" data-toggle="modal" data-target="#AddTaskModal">Add Task</button> [(ngModel)]="task.name"-->
+              <button (click)="addTask(todolist._id, TaskName.value)" class="btn btn-default" type="button">Add Task</button>
             </span>
           </div>
         </div>
@@ -34,11 +34,11 @@
                 <!--<td class="tick">
                   <a href="#"></a>-->
 			<div class="tick">
-				<input type="checkbox" class="form-check-input"> 
+				<input type="checkbox" class="form-check-input" [checked]="TodoListTask.status==true" #checkbox (change)="editTaskCheck(checkbox.checked,TodoListTask,todolist._id)"> 
 			</div>
                 </td>
                 <td class="borderred"></td>
-                <td class="what" [style.text-decoration]="line-through==true?'none':'none'">{{TodoListTask.name}}</td>
+                <td class="what" [ngStyle]="TodoListTask.status == true && {'text-decoration': 'line-through'}" > {{ TodoListTask.name }} </td>
                 <td class="icon">
 			<i title="Sort" class="fas fa-sort" aria-hidden="true"></i>
                 	<i title="Edit" class="fas fa-edit" (click)="editTask(TodoListTask, todolist._id)" aria-hidden="true" data-toggle="modal" data-target="#AddTaskModal"> <!--#addTask data-toggle="modal" data-target="#AddTaskModal"--></i>

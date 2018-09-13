@@ -17,6 +17,8 @@ export class AddTaskComponent implements OnInit {
 
   @ViewChild('closeBtnTask') closeBtnTask: ElementRef;
   public task : Task;
+  //public TskStatChecked;
+  //public TskStatActive;
 
   constructor(private addTaskService: AddTaskService, private router: Router, private commonService: CommonService) {
   	this.task = new Task();

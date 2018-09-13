@@ -48,5 +48,14 @@ export class ShowTodoService {
 		})
 	}
 
+	updateTask(task: Task){
+		return this.http.post('/api/task/updateTask',{
+			id: task._id,
+			name : task.name,
+			stat : task.status,
+			project_id: task.project_id
+		})
+	}
+
 
 }
