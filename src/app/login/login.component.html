@@ -3,12 +3,12 @@
      <label for="inputEmail" class="sr-only">Login</label>
         <input name="email" [(ngModel)] = "user.username" type="email" id="inputEmail" class="form-control" placeholder="Login" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input name="password" [(ngModel)] = "user.password" type="password" id="inputPassword" class="form-control" placeholder="Password" (keyup.enter)="validateLogin();" required>
+        <input name="password" [(ngModel)] = "user.password" type="password" id="inputPassword" class="form-control" placeholder="Password" (keyup.enter)="validateLogin()" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-	<button class="btn btn-lg btn-primary btn-block btn-todo" (click)="validateLogin();" type="button">Sign in</button>
+	<button class="btn btn-lg btn-primary btn-block btn-todo" (click)="validateLogin()" type="button">Sign in</button>
 <button (click)="signup()" type="button" class="btn btn-link">sign up</button>
 </form>
