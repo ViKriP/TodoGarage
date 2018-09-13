@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 /* Space out content a bit */
+html{
+	position: relative;
+	min-height: 100%;
+}
+
 body {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
@@ -30,6 +35,7 @@ body {
                       #aa550c 96.2%, #a9550c 96.7%, #a9540c 97%, #a8540c 97.4%, #a8550d 97.4%, #a8550d 97.7%, #a8530c 97.7%, #a8530c 98%,
                       #a7530c 98%, #a7530c 98.8%, #a6530c 98.8%, #a6530c 99%, #a6520c 99%, #a6520c 99.3%, #a6530d 99.3%, #a6520c, #a6530d 99.5%, 
                       #a5520c) no-repeat scroll 0 0;
+	height: 100%;
 }
 
 .btn-todo {
