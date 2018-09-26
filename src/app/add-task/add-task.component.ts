@@ -6,7 +6,6 @@ import { CommonService } from '../service/common.service';
 
 import { Task } from '../models/task.model';
 
-
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
@@ -19,6 +18,9 @@ export class AddTaskComponent implements OnInit {
   public task : Task;
   //public TskStatChecked;
   //public TskStatActive;
+
+    public dateTime: Date;
+    //public selectedMoment = new Date();
 
   constructor(private addTaskService: AddTaskService, private router: Router, private commonService: CommonService) {
   	this.task = new Task();

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ROUTING } from './app.routing';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +18,7 @@ import { ShowTodoComponent } from './show-todo/show-todo.component';
 import { AddTodolistComponent } from './add-todolist/add-todolist.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [
@@ -33,9 +35,12 @@ import { AddTaskComponent } from './add-task/add-task.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ROUTING,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule
   ],
   providers: [CommonService],
   bootstrap: [RootComponent]

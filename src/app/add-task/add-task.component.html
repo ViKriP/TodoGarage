@@ -16,6 +16,14 @@
                         <input name="title" type="text" [(ngModel)]="task.name" class="form-control" id="tsk_name" placeholder="Enter Task name" (keyup.enter)="updTask()">
                     </div>
 
+                    <div class="form-group">
+                        <label for="tsk_deadline">Deadline</label>
+                        <input name="task_deadline" type="text" class="form-control" id="tsk_deadline" aria-describedby="tsk_deadline" placeholder="Enter Task deadline" [(ngModel)]="dateTime" [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
+			<owl-date-time #dt></owl-date-time>
+
+<!--<owl-date-time-inline [(ngModel)]="selectedMoment"></owl-date-time-inline>-->
+
+                    </div>
 			<!--<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-secondary" [class.active]="task.status==true">
 					<input type="radio" name="TaskStatus" id="IDTaskStatus1" autocomplete="off" [value]="1" [checked]="task.status==true"> Done
