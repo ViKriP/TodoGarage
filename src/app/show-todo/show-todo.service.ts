@@ -44,7 +44,8 @@ export class ShowTodoService {
 		return this.http.post('/api/task/createTask',{
 			name : task.name,
 			status : "0",
-			project_id: task.project_id
+			project_id: task.project_id,
+			deadline: task.deadline
 		})
 	}
 
@@ -53,7 +54,8 @@ export class ShowTodoService {
 			id: task._id,
 			name : task.name,
 			stat : task.status,
-			project_id: task.project_id
+			project_id: task.project_id,
+			deadline: task.deadline
 		})
 	}
 

@@ -16,7 +16,8 @@ export class AddTaskService {
 			id: task._id,
 			name : task.name,
 			stat : task.status,
-			project_id: task.project_id
+			project_id: task.project_id,
+			deadline: task.deadline
 		})
 	}
 

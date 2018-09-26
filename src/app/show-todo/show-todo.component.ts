@@ -152,9 +152,12 @@ this.updTaskCheck();
     })
   }
 
-  addTask(TodoListId, TskName) {
+  addTask(TodoListId, TskName, TaskDeadline) {
+var DateT = new Date(TaskDeadline);
+//DateT = TaskDeadline;
 	this.task.name = TskName; 
 	this.task.project_id = TodoListId; 
+	this.task.deadline = DateT.toISOString();
 	if(this.task.name){
 		this.showTodoService.addTask(this.task).subscribe(res =>{
 			this.closeBtnTask.nativeElement.click();

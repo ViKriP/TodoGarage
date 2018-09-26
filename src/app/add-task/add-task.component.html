@@ -18,7 +18,7 @@
 
                     <div class="form-group">
                         <label for="tsk_deadline">Deadline</label>
-                        <input name="task_deadline" type="text" class="form-control" id="tsk_deadline" aria-describedby="tsk_deadline" placeholder="Enter Task deadline" [(ngModel)]="dateTime" [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
+                        <input name="task_deadline" type="text" class="form-control" id="tsk_deadline" aria-describedby="tsk_deadline" placeholder="Enter Task deadline" [(ngModel)]="task.deadline" [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
 			<owl-date-time #dt></owl-date-time>
 
 <!--<owl-date-time-inline [(ngModel)]="selectedMoment"></owl-date-time-inline>-->

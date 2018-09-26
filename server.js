@@ -237,7 +237,8 @@ app.post('/api/task/createTask', (req, res) => {
             {
 		"_id" : new ObjectId(),
                 "name": req.body.name,
-                "status": "0"
+                "status": "0",
+		"deadline": req.body.deadline
             }
         }
     },
@@ -263,7 +264,8 @@ app.post('/api/task/updateTask', (req, res) => {
 			{ $set: 
 				{
 					"tasks.$.name" : req.body.name, 
-					"tasks.$.status" : req.body.stat
+					"tasks.$.status" : req.body.stat,
+					"tasks.$.deadline" : req.body.deadline
 				}
 			},
 			(err, doc) => {

@@ -19,7 +19,7 @@ export class AddTaskComponent implements OnInit {
   //public TskStatChecked;
   //public TskStatActive;
 
-    public dateTime: Date;
+    //public dateTime: Date;
     //public selectedMoment = new Date();
 
   constructor(private addTaskService: AddTaskService, private router: Router, private commonService: CommonService) {
