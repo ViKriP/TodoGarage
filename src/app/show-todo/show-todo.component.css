@@ -119,6 +119,15 @@ i{
     width: 100%;
 }
 
+.datetask {
+    color: #999999;
+    border-right: 1px solid #e7ebea;
+}
+
+.deadlineExpired{
+	background-color: #edc5c5;
+}
+
 table {
     width: 100%;
     height: 100%;

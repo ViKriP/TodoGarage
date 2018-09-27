@@ -15,12 +15,12 @@
         <div class="searcher">
           <div class="plus"></div>
           <div class="input-group" style="width: auto;">
-            <input type="text" class="form-control" placeholder="Start typing here to create a task..." #TaskName (keyup.enter)="addTask(todolist._id, TaskName.value)">
+            <input type="text" class="form-control" placeholder="Start typing here to create a task..." #TaskName (keyup.enter)="addTask(todolist._id, TaskName.value, TaskDeadline.value)">
             <span class="input-group-btn">
               <!--<button #addTask class="btn btn-default" type="button" data-toggle="modal" data-target="#AddTaskModal">Add Task</button> [(ngModel)]="task.name" [(ngModel)]="task.deadline"-->
 
  <div class="col-xs-5">
-<input name="task_deadline" type="text" class="form-control" id="tsk_deadline" aria-describedby="tsk_deadline" placeholder="Enter task deadline" #TaskDeadline [owlDateTime]="dt" [owlDateTimeTrigger]="dt"  style="width: 170px;">
+<input name="task_deadline" type="text" class="form-control" id="tsk_deadline" aria-describedby="tsk_deadline" placeholder="Enter task deadline" #TaskDeadline [min]="min" [owlDateTime]="dt" [owlDateTimeTrigger]="dt"  style="width: 170px;" (keyup.enter)="addTask(todolist._id, TaskName.value, TaskDeadline.value)">
 			<owl-date-time #dt></owl-date-time>
 </div>
 
@@ -36,16 +36,16 @@
             <tbody>
 
               <tr *ngFor="let TodoListTask of todolist.tasks" >
-                <td>
-                <!--<td class="tick">
+                <td> {{ DateExpired( TodoListTask,todolist._id ) }}
+                <!--<td class="tick" DateExpired(TodoListTask._id,TodoListTask.deadline)  [ngStyle]="DateExpired(TodoListTask.deadline) == true && {'background-color': '#edc5c5'}">
                   <a href="#"></a>-->
 			<div class="tick">
 				<input type="checkbox" class="form-check-input" [checked]="TodoListTask.status==true" #checkbox (change)="editTaskCheck(checkbox.checked,TodoListTask,todolist._id)"> 
 			</div>
                 </td>
                 <td class="borderred"></td>
-                <td class="what" [ngStyle]="TodoListTask.status == true && {'text-decoration': 'line-through'}" > {{ TodoListTask.name }} |  </td>
-<td>{{ TodoListTask.deadline }}</td>
+                <td class="what" [ngStyle]="TodoListTask.status == true && {'text-decoration': 'line-through'}" > {{ TodoListTask.name }} </td>
+<td class="datetask">{{ DateTask(TodoListTask.deadline) }}</td>
                 <td class="icon">
 			<i title="Sort" class="fas fa-sort" aria-hidden="true"></i>
                 	<i title="Edit" class="fas fa-edit" (click)="editTask(TodoListTask, todolist._id)" aria-hidden="true" data-toggle="modal" data-target="#AddTaskModal"> <!--#addTask data-toggle="modal" data-target="#AddTaskModal"--></i>

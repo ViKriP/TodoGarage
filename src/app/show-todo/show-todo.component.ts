@@ -30,6 +30,9 @@ export class ShowTodoComponent implements OnInit {
   public task : Task;
   //public TaskCheck;
 
+  public min = new Date();
+
+
   constructor(private showTodoService: ShowTodoService, private commonService: CommonService) {
   	
 		/*this.commonService.taskEdit_Observable.subscribe(res => {
@@ -153,18 +156,47 @@ this.updTaskCheck();
   }
 
   addTask(TodoListId, TskName, TaskDeadline) {
-var DateT = new Date(TaskDeadline);
-//DateT = TaskDeadline;
-	this.task.name = TskName; 
-	this.task.project_id = TodoListId; 
-	this.task.deadline = DateT.toISOString();
-	if(this.task.name){
-		this.showTodoService.addTask(this.task).subscribe(res =>{
-			this.closeBtnTask.nativeElement.click();
-			this.commonService.notifyTodolistAddition();
-		});
+
+try {
+		var DateT = new Date(TaskDeadline);
+	
+		if(TskName && DateT){
+
+		this.task.name = TskName; 
+		this.task.project_id = TodoListId; 
+		this.task.deadline = DateT.toISOString();
+
+			this.showTodoService.addTask(this.task).subscribe(res =>{
+				this.closeBtnTask.nativeElement.click();
+				this.commonService.notifyTodolistAddition();
+			});
+		} else {
+			alert('Name or Deadline -Task- required');
+		}
+} catch (e) {
+  alert( "В данных допущена ошибка\n"+ e.name +": "+ e.message);
+}
+
+  }
+
+  DateTask(DateTxt) {
+	var dt = new Date(DateTxt);
+        var options = {  day: 'numeric', month: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' };
+	return dt.toLocaleString('uk-UA', options); //{ timeZone: 'UTC' }
+  }
+
+  DateExpired( task: Task, proj_id){ 
+
+	var dNow = new Date();
+	var dTsk = new Date(task.deadline);	
+
+	if (dNow > dTsk){
+		//this.editTaskCheck(true, task, proj_id);
+		//return task.name;
+		//return task._id +" | "+ task.name +" | "+ proj_id;
+		//alert('Ok '+tskId);
 	} else {
-		alert('Name -Task- required');
+		//return false;
 	}
   }
 

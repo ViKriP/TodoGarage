@@ -33,13 +33,13 @@ export class AddTaskComponent implements OnInit {
   }
 
   updTask() {
-	if(this.task._id){
+	if(this.task._id && this.task.deadline){
 		this.addTaskService.updateTask(this.task).subscribe(res =>{
 			this.closeBtnTask.nativeElement.click();
 			this.commonService.notifyTodolistAddition();
 		});
 	} else {
-		alert('Name required');
+		alert('Name or Deadline -Task- required');
 	}
   }
 
