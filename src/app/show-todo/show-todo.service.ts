@@ -59,5 +59,10 @@ export class ShowTodoService {
 		})
 	}
 
-
+	dateExpired(prId,tskId) {
+		return this.http.post('/api/task/dateExpired',{
+			prId: prId, 
+			tskId: tskId
+		})
+	}
 }

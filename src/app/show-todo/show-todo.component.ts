@@ -179,25 +179,35 @@ try {
 
   }
 
-  DateTask(DateTxt) {
+  DateTask( DateTxt ) {
 	var dt = new Date(DateTxt);
         var options = {  day: 'numeric', month: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' };
 	return dt.toLocaleString('uk-UA', options); //{ timeZone: 'UTC' }
   }
 
-  DateExpired( task: Task, proj_id){ 
+
+  dateExpired( prId,tsk: Task ) { 
 
 	var dNow = new Date();
-	var dTsk = new Date(task.deadline);	
-
+	var dTsk = new Date(tsk.deadline);	
+if (tsk.status == "0") {
 	if (dNow > dTsk){
-		//this.editTaskCheck(true, task, proj_id);
-		//return task.name;
-		//return task._id +" | "+ task.name +" | "+ proj_id;
-		//alert('Ok '+tskId);
+//return new Date().toISOString();
+//return new Date().toString();
+//	this.editTaskCheck("0", task, proj_id)
+
+    this.showTodoService.dateExpired(prId,tsk._id).subscribe(res => {
+	//this.getAllTodolist();
+	console.log('dateExpired - ', res)
+      //this.closeBtnTask.nativeElement.click();
+	})
+//return (prId +" "+ tsk._id +" "+ tsk.deadline);
 	} else {
 		//return false;
 	}
+}
   }
+
+
 
 }

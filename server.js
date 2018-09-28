@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
-//const url = 'mongodb://localhost/todogarage';
-const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
+const url = 'mongodb://localhost/todogarage';
+//const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
 
 const ObjectId = require('mongodb').ObjectID;
 
@@ -278,19 +278,73 @@ app.post('/api/task/updateTask', (req, res) => {
 	});
 })
 
+app.post('/api/task/dateExpired', (req, res) => {
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
+		if(err) throw err;
+		Todolist.updateOne(
+			{
+				"_id" : ObjectId(req.body.prId), 
+				"tasks._id" : ObjectId(req.body.tskId)
+			}, 
+			{ $set: 
+				{
+					"tasks.$.status" : "1"
+				}
+			},
+			(err, doc) => {
+			if(err) throw err;
+			return res.status(200).json({
+				status: 'success',
+				data: doc
+			})
+		})
+	});
+})
+
+app.post('/api/task/dateExpired_2', (req, res) => {
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
+		if(err) throw err;
+		Todolist.update(
+			{
+				//"tasks.name" : "A"
+				//"tasks.deadline" : { $lt: new Date().toString() } // .toISOString() new ISODate("2018-09-28T08:23:00.000Z") }
+			}, 
+			{ $set: 
+				{
+					"tasks.$.status" : 1
+				}
+			}, {
+				multi: true,
+				//arrayFilters: [ { "elem.deadline": { $lt: new Date().toString() } } ]
+				//arrayFilters: [ { "elem.name": "A" } ]
+
+			},
+			(err, doc) => {
+			if(err) throw err;
+
+			return res.status(200).json({
+				status: 'success',
+				data: doc
+
+			})
+			}
+		)
+	});
+})
+
 app.post('/api/task/deleteTask', (req, res) => {
 	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 
 		Todolist.update(
-    { "_id": ObjectId(req.body.project_id) },
-    { "$pull": 
-        {"tasks": 
-            {
-		"_id" : ObjectId(req.body.id)
-            }
-        }
-    },
+    			{ "_id": ObjectId(req.body.project_id) },
+			    { "$pull": 
+			        {"tasks": 
+            			{
+					"_id" : ObjectId(req.body.id)
+            			}
+        			}
+    			},
 			(err, doc) => {
 			if(err) throw err;
 

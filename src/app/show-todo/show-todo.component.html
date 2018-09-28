@@ -36,9 +36,9 @@
             <tbody>
 
               <tr *ngFor="let TodoListTask of todolist.tasks" >
-                <td> {{ DateExpired( TodoListTask,todolist._id ) }}
-                <!--<td class="tick" DateExpired(TodoListTask._id,TodoListTask.deadline)  [ngStyle]="DateExpired(TodoListTask.deadline) == true && {'background-color': '#edc5c5'}">
-                  <a href="#"></a>-->
+                <td>
+                <!--<td class="tick" [ngStyle]="DateExpired(TodoListTask.deadline) == true && {'background-color': '#edc5c5'}">
+                  <a href="#"></a>  | {{dateExpired(todolist._id,TodoListTask)}}-->
 			<div class="tick">
 				<input type="checkbox" class="form-check-input" [checked]="TodoListTask.status==true" #checkbox (change)="editTaskCheck(checkbox.checked,TodoListTask,todolist._id)"> 
 			</div>

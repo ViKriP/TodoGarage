@@ -122,6 +122,7 @@ i{
 .datetask {
     color: #999999;
     border-right: 1px solid #e7ebea;
+    font-size: 10pt;
 }
 
 .deadlineExpired{
