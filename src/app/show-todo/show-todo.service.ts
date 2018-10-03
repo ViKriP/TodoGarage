@@ -45,7 +45,8 @@ export class ShowTodoService {
 			name : task.name,
 			status : "0",
 			project_id: task.project_id,
-			deadline: task.deadline
+			deadline: task.deadline,
+			order: task.order
 		})
 	}
 
@@ -59,10 +60,21 @@ export class ShowTodoService {
 		})
 	}
 
-	dateExpired(prId,tskId) {
+	dateExpired( prId, tskId ) {
 		return this.http.post('/api/task/dateExpired',{
 			prId: prId, 
 			tskId: tskId
 		})
+	}
+
+	sortOrdTask( dragTsk, dropTsk ) {
+		return this.http.post('/api/task/sortOrdTask',{
+			projId: dragTsk.dragData[1],
+			dragId: dragTsk.dragData[0]._id,
+			dragOrder: dragTsk.dragData[0].order,
+			dropId: dropTsk._id,
+			dropOrder: dropTsk.order
+		})
+		
 	}
 }

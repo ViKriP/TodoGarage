@@ -1,3 +1,42 @@
+<h3>Swap List Demo</h3>
+<p>Move Items back and forth from List 1 to List 2 and vice versa.</p>
+<hr>
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="card card-outline-primary mb-3" droppable [dropScope]="'swap-target-1'" [dragOverClass]="'drag-target-border'"
+            [dragHintClass]="'drag-hint'" (onDrop)="onList1Drop($event)">
+            <div class="card-header card-inverse card-primary">List 1</div>
+            <div class="card-block scroll-list">
+                <ul class="list-group">
+                    <li draggable *ngFor="let item of list1" [dragScope]="'swap-target-2'" [dragClass]="'drag-over'" [dragData]="item" class="list-group-item ">
+                        {{item.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="card card-outline-primary mb-3" droppable [dropScope]="'swap-target-2'" [dragOverClass]="'drag-target-border'"
+            [dragHintClass]="'drag-hint'" (onDrop)="onList2Drop($event)">
+            <div class="card-header card-inverse card-primary">List 2</div>
+            <div class="card-block scroll-list">
+                <ul class="list-group">
+                    <li draggable *ngFor="let item of list2" [dragScope]="'swap-target-1'" [dragClass]="'drag-over'" [dragData]="item" class="list-group-item">
+                        {{item.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 <div class="list-group" *ngFor="let todolist of todolists"> 
         <div class="titler">
           <div class="calendar"></div>
@@ -32,11 +71,11 @@
 	</form>-->
 
         <div class="block">
-          <table >
+          <table droppable [dropScope]="'swap-target-'+todolist.name" [dragOverClass]="'drag-target-border'"
+[dragHintClass]="'drag-hint'" (onDrop)="TaskDrag($event)">
             <tbody>
 
-              <tr *ngFor="let TodoListTask of todolist.tasks | TskSort:'order'" draggable [dragScope]="'swap-target-'+todolist.name" [dragClass]="'drag-over'" [dragData]="[TodoListTask, todolist._id, onDragEnter]" (onDragStart)="TaskDrag(TodoListTask)"  droppable [dropScope]="'swap-target-'+todolist.name" [dragOverClass]="'drag-target-border'"
-[dragHintClass]="'drag-hint'" (onDrop)="TaskDrop($event,TodoListTask)">
+              <tr *ngFor="let TodoListTask of todolist.tasks" draggable [dragScope]="'swap-target-'+todolist.name" [dragClass]="'drag-over'" [dragData]="[TodoListTask, todolist._id, onDragEnter]" (onDragEnter)="TaskDrop($event)">
                 <td>
                 <!--<td class="tick" [ngStyle]="DateExpired(TodoListTask.deadline) == true && {'background-color': '#edc5c5'}">
                   <a href="#"></a>  | {{dateExpired(todolist._id,TodoListTask)}}-->

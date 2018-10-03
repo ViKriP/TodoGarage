@@ -6,12 +6,18 @@ import { CommonService, } from '../service/common.service';
 import { Todolist } from '../models/todolist.model';
 import { Task } from '../models/task.model';
 
+import { DropEvent } from 'ng-drag-drop';
+
+//import { TskSortPipe } from './tsksort.pipe';
+
+
 @Component({
   selector: 'app-show-todo',
   templateUrl: './show-todo.component.html',
   styleUrls: ['./show-todo.component.css'],
   providers: [ ShowTodoService ]
 })
+
 export class ShowTodoComponent implements OnInit {
 
   @ViewChild('closeBtnTodolist') closeBtnTodolist: ElementRef;
@@ -28,7 +34,8 @@ export class ShowTodoComponent implements OnInit {
   public loginusrs : any [];
 
   public task : Task;
-  //public TaskCheck;
+  
+  //public TskDrop;
 
   public min = new Date();
 
@@ -155,6 +162,7 @@ this.updTaskCheck();
     })
   }
 
+
   addTask(TodoListId, TskName, TaskDeadline) {
 
 try {
@@ -167,6 +175,7 @@ try {
 		this.task.deadline = DateT.toISOString();
 
 			this.showTodoService.addTask(this.task).subscribe(res =>{
+	console.log('Task_ADD - ', res);
 				this.closeBtnTask.nativeElement.click();
 				this.commonService.notifyTodolistAddition();
 			});
@@ -208,6 +217,31 @@ if (tsk.status == "0") {
 }
   }
 
+//----
 
+  TaskDrag(tsk) {
+//console.log(e.dragData[0].name+" - "+e.dragData[1]);
+///console.log("Ok - "+tsk.name+" ord - "+tsk.order);
+//this.TskDrop = tsk;
+    //this.list1.push(e.dragData);
+    //this.removeItem(e.dragData, this.list2)
+  }
+
+  TaskDrop(e: DropEvent,tsk) {
+//console.log(e);
+//console.log("drag - "+e.dragData[0].name+" - "+e.dragData[1]+" - "+tsk.name);
+//console.log("Ok - "+tsk.name+" ord - "+tsk.order);
+
+	this.showTodoService.sortOrdTask(e,tsk).subscribe(res =>{
+		//this.task.order = 4;
+				//this.closeBtnTask.nativeElement.click();
+	this.getAllTodolist();
+	this.commonService.notifyTodolistAddition();
+	//console.log('Task_SORT_order - ',res);
+	});
+
+  }
+
+//----
 
 }

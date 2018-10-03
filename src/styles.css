@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 /* Space out content a bit */
 @import "~ng-pick-datetime/assets/style/picker.min.css";
+
 .cdk-overlay-container{z-index:2000}
+
 html{
 	position: relative;
 	min-height: 100%;
@@ -54,3 +56,5 @@ body {
   text-align: center;
   font-size: 14px;
 }
+
+

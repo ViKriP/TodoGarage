@@ -19,6 +19,9 @@ import { AddTodolistComponent } from './add-todolist/add-todolist.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { NgDragDropModule } from 'ng-drag-drop';
+
+import { TskSortPipe } from './tsksort.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     TodoComponent,
     ShowTodoComponent,
     AddTodolistComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    TskSortPipe
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     FormsModule,
     HttpClientModule,
     OwlDateTimeModule, 
-    OwlNativeDateTimeModule
+    OwlNativeDateTimeModule,
+    NgDragDropModule.forRoot()
   ],
   providers: [CommonService],
   bootstrap: [RootComponent]

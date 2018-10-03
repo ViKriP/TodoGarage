@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost/todogarage';
-//const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
+//const url = 'mongodb://localhost/todogarage';
+const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarage';
 
 const ObjectId = require('mongodb').ObjectID;
 
@@ -62,7 +62,6 @@ app.post('/api/user/login', (req, res) => {
 app.post('/api/user/getUser', (req, res) => {
 	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
-//		User.find({},[],{ sort: { _id: 1 } },(err, doc) => {
 		User.find({},[],{ sort: { _id: 1 } },(err, doc) => {
 			if(err) throw err;
 			return res.status(200).json({
@@ -230,18 +229,44 @@ app.post('/api/todolist/deleteTodolist', (req, res) => {
 app.post('/api/task/createTask', (req, res) => {
 	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
+var ordTsk;
+
+Todolist.findOne({"_id": ObjectId(req.body.project_id)},[], function(err, proj) {
+    if (err) throw err;
+
+//console.log(proj);
+	if (proj.tasks.length != 0) {
+		var ordTskMin = proj.tasks.slice(0);
+		ordTskMin.sort(function(a,b) {
+			return a.order + b.order; //order + -
+		});
+
+/*console.log('by order:');
+console.log(ordTskMin[0].name);
+console.log(ordTskMin);
+console.log("--------");
+console.log(ordTskMin[0].name+" | "+ordTskMin[0].order);
+console.log("test - "+ordTskMin[0].name); */
+    
+		ordTsk = Number(ordTskMin[0].order);
+	} else {
+		ordTsk = 0;
+	}
+
 		Todolist.update(
-    { "_id": req.body.project_id},
-    { "$push": 
-        {"tasks": 
-            {
-		"_id" : new ObjectId(),
-                "name": req.body.name,
-                "status": "0",
-		"deadline": req.body.deadline
-            }
-        }
-    },
+    			{ "_id": req.body.project_id},
+    			{ "$push": 
+        			{"tasks": 
+            			{
+					"_id" : new ObjectId(),
+                			"name": req.body.name,
+                			"status": "0",
+					"deadline": req.body.deadline,
+					"order": ++ordTsk
+            			}
+        			}
+    			},
+
 			(err, doc) => {
 			if(err) throw err;
 			return res.status(200).json({
@@ -250,6 +275,9 @@ app.post('/api/task/createTask', (req, res) => {
 			})
 		})
 	});
+
+}); //finrOne
+
 })
 
 
@@ -300,6 +328,123 @@ app.post('/api/task/dateExpired', (req, res) => {
 		})
 	});
 })
+
+
+app.post('/api/task/sortOrdTask', (req, res) => {
+	mongoose.connect(url, { useNewUrlParser: true }, function(err){
+		if(err) throw err;
+
+if (Number(req.body.dragOrder)>Number(req.body.dropOrder)){
+
+var ItemStartInc = Number(req.body.dragOrder)-1;
+
+Todolist.find({"_id": ObjectId(req.body.projId)}, function (err, todos){
+todos.forEach(function(doc) {
+//console.log(doc); 
+// console.log(doc.name);
+	for ( var i=0; i < doc.tasks.length; i++ ) {
+		if ( doc.tasks[i].order <= ItemStartInc  &&  doc.tasks[i].order >= Number(req.body.dropOrder)) {
+            //doc.tasks[i].order++;
+
+/* console.log("ItemStartInc - "+ItemStartInc+
+	" req.body.dropOrder - "+req.body.dropOrder+
+	" doc.tasks[i].order -"+doc.tasks[i].order+
+	" doc.tasks[i].name - "+doc.tasks[i].name); */
+
+var ItemInc = doc.tasks[i].order+1;
+ /*console.log("---- doc._id - "+doc._id+
+		" doc.tasks[i]._id - "+doc.tasks[i]._id+
+		" doc.tasks[i].order - "+doc.tasks[i].order);
+*/
+		Todolist.update(
+			{ "_id": ObjectId(doc._id), "tasks._id": ObjectId(doc.tasks[i]._id) },
+			{ "$set": { "tasks.$.order": ItemInc } },
+			(err, doc) => {
+				if(err) throw err;
+				/*return res.status(200).json({
+					status: 'success',
+					data: doc
+			})*/}
+		);
+		}
+	}
+//---
+ /*console.log("---- req.body.projId - "+req.body.projId+
+		" req.body.dragId - "+req.body.dragId+
+		" req.body.dropOrder - "+req.body.dropOrder);
+*/
+	Todolist.update(
+		{ "_id": ObjectId(req.body.projId), "tasks._id": ObjectId(req.body.dragId) },
+		{ "$set": { "tasks.$.order": Number(req.body.dropOrder) } },
+		(err, doc) => {
+			if(err) throw err;
+			return res.status(200).json({
+				status: 'success'
+		})}
+	);
+})
+});
+
+
+} else {
+//---
+var ItemStartInc = Number(req.body.dragOrder)+1;
+
+Todolist.find({"_id": ObjectId(req.body.projId)}, function (err, todos){
+todos.forEach(function(doc) {
+//console.log(doc); 
+// console.log(doc.name);
+	for ( var i=0; i < doc.tasks.length; i++ ) {
+		if ( doc.tasks[i].order >= ItemStartInc  &&  doc.tasks[i].order <= Number(req.body.dropOrder)) {
+            //doc.tasks[i].order++;
+
+
+/* console.log("ItemStartInc - "+ItemStartInc+
+	" req.body.dropOrder - "+req.body.dropOrder+
+	" doc.tasks[i].order -"+doc.tasks[i].order+
+	" doc.tasks[i].name - "+doc.tasks[i].name); */
+
+var ItemInc = doc.tasks[i].order-1;
+ console.log("---- doc._id - "+doc._id+
+		" doc.tasks[i]._id - "+doc.tasks[i]._id+
+		" doc.tasks[i].order - "+doc.tasks[i].order);
+
+		Todolist.update(
+			{ "_id": ObjectId(doc._id), "tasks._id": ObjectId(doc.tasks[i]._id) },
+			{ "$set": { "tasks.$.order": ItemInc } },
+			(err, doc) => {
+				if(err) throw err;
+				/*return res.status(200).json({
+					status: 'success',
+
+					data: doc
+			})*/}
+		);
+		}
+	}
+//---
+/* console.log("---- req.body.projId - "+req.body.projId+
+		" req.body.dragId - "+req.body.dragId+
+		" req.body.dropOrder - "+req.body.dropOrder);
+*/
+	Todolist.update(
+		{ "_id": ObjectId(req.body.projId), "tasks._id": ObjectId(req.body.dragId) },
+		{ "$set": { "tasks.$.order": Number(req.body.dropOrder) } },
+		(err, doc) => {
+			if(err) throw err;
+			return res.status(200).json({
+
+				status: 'success'
+		})}
+	);
+})
+});
+//---
+}
+
+});
+})
+
 
 app.post('/api/task/dateExpired_2', (req, res) => {
 	mongoose.connect(url, { useNewUrlParser: true }, function(err){
