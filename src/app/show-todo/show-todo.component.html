@@ -3,21 +3,16 @@
           <div class="calendar"></div>
           <div class="titl">{{todolist.name}}</div>
           <div class="icon">
-            <!--<a href="" class="pencil"></a>{{getAllTask2(todolist._id)}}
-            <a href="" class="recycle"></a>-->
                 	<i title="Edit" class="fas fa-edit" (click)="editTodolist(todolist)" aria-hidden="true"></i>
                 	<i title="Delete" class="fas fa-trash-alt" (click)="setDeleteTodolist(todolist)" data-toggle="modal" data-target="#deleteTodolistModal" aria-hidden="true"></i>
           </div>
         </div>
 
-	<!--<form>
-	<div class="form-group"> {{todolist.project_id}} (click)=getAllTask2(todolist._id)-->
         <div class="searcher">
           <div class="plus"></div>
           <div class="input-group" style="width: auto;">
             <input type="text" class="form-control" placeholder="Start typing here to create a task..." #TaskName (keyup.enter)="addTask(todolist._id, TaskName.value, TaskDeadline.value)">
             <span class="input-group-btn">
-              <!--<button #addTask class="btn btn-default" type="button" data-toggle="modal" data-target="#AddTaskModal">Add Task</button> [(ngModel)]="task.name" [(ngModel)]="task.deadline"-->
 
  <div class="col-xs-5">
 <input name="task_deadline" type="text" class="form-control" id="tsk_deadline" aria-describedby="tsk_deadline" placeholder="Enter task deadline" #TaskDeadline [min]="min" [owlDateTime]="dt" [owlDateTimeTrigger]="dt"  style="width: 170px;" (keyup.enter)="addTask(todolist._id, TaskName.value, TaskDeadline.value)">
@@ -28,18 +23,14 @@
             </span>
           </div>
         </div>
-	<!--</div>
-	</form>-->
 
         <div class="block">
           <table >
             <tbody>
 
-              <tr *ngFor="let TodoListTask of todolist.tasks | TskSort:'order'" draggable [dragScope]="'swap-target-'+todolist.name" [dragClass]="'drag-over'" [dragData]="[TodoListTask, todolist._id, onDragEnter]" (onDragStart)="TaskDrag(TodoListTask)"  droppable [dropScope]="'swap-target-'+todolist.name" [dragOverClass]="'drag-target-border'"
-[dragHintClass]="'drag-hint'" (onDrop)="TaskDrop($event,TodoListTask)">
+              <tr *ngFor="let TodoListTask of todolist.tasks | TskSort:'order'" draggable [dragScope]="'swap-target-'+todolist.name" [dragClass]="'drag-over'" [dragData]="[TodoListTask, todolist._id, onDragEnter]" (onDragStart)="TaskDrag(TodoListTask)" droppable [dropScope]="'swap-target-'+todolist.name" [dragOverClass]="'drag-target-border'"
+[dragHintClass]="'drag-hint'" (onDrop)="TaskDrop($event,TodoListTask)" [dragHandle]="'.drag-bar'">
                 <td>
-                <!--<td class="tick" [ngStyle]="DateExpired(TodoListTask.deadline) == true && {'background-color': '#edc5c5'}">
-                  <a href="#"></a>  | {{dateExpired(todolist._id,TodoListTask)}}-->
 			<div class="tick">
 				<input type="checkbox" class="form-check-input" [checked]="TodoListTask.status==true" #checkbox (change)="editTaskCheck(checkbox.checked,TodoListTask,todolist._id)"> 
 			</div>
@@ -48,8 +39,8 @@
                 <td class="what" [ngStyle]="TodoListTask.status == true && {'text-decoration': 'line-through'}" > {{ TodoListTask.name }} </td>
 <td class="datetask">{{ DateTask(TodoListTask.deadline) }}</td>
                 <td class="icon">
-			<i title="Sort" class="fas fa-sort" aria-hidden="true"></i>
-                	<i title="Edit" class="fas fa-edit" (click)="editTask(TodoListTask, todolist._id)" aria-hidden="true" data-toggle="modal" data-target="#AddTaskModal"> <!--#addTask data-toggle="modal" data-target="#AddTaskModal"--></i>
+			<i #dragHandle title="Sort" class="drag-bar fas fa-sort" aria-hidden="true"></i>
+                	<i title="Edit" class="fas fa-edit" (click)="editTask(TodoListTask, todolist._id)" aria-hidden="true" data-toggle="modal" data-target="#AddTaskModal"></i>
                 	<i title="Delete" class="fas fa-trash-alt" (click)="setDeleteTask(TodoListTask, todolist._id)" data-toggle="modal" data-target="#deleteTaskModal" aria-hidden="true"></i>
                 </td>
               </tr>

@@ -7,8 +7,6 @@ const url = 'mongodb://todogarage:todo9garage9@ds229312.mlab.com:29312/todogarag
 
 const ObjectId = require('mongodb').ObjectID;
 
-//const ngUniversal = require('@nguniversal/express-engine');
-
 const User = require('./server/model/user');
 const Post = require('./server/model/post');
 const Todolist = require('./server/model/todolist');
@@ -18,12 +16,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false}));
 
 const path = require('path');
-//const http = require('http');
 
 app.use(express.static(path.join(__dirname, '/dist')));
 
 app.get('/', function (req, res) {
-  //res.send('Hello World!');
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
@@ -36,8 +32,6 @@ app.post('/api/user/login', (req, res) => {
 	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 		User.find({
-			//_id: req.body._id,
-			//name: req.body.name, 
 			username : req.body.username, 
 			password : req.body.password
 		}, function(err, user){
@@ -234,20 +228,12 @@ var ordTsk;
 Todolist.findOne({"_id": ObjectId(req.body.project_id)},[], function(err, proj) {
     if (err) throw err;
 
-//console.log(proj);
 	if (proj.tasks.length != 0) {
 		var ordTskMin = proj.tasks.slice(0);
 		ordTskMin.sort(function(a,b) {
 			return a.order + b.order; //order + -
 		});
 
-/*console.log('by order:');
-console.log(ordTskMin[0].name);
-console.log(ordTskMin);
-console.log("--------");
-console.log(ordTskMin[0].name+" | "+ordTskMin[0].order);
-console.log("test - "+ordTskMin[0].name); */
-    
 		ordTsk = Number(ordTskMin[0].order);
 	} else {
 		ordTsk = 0;
@@ -334,45 +320,27 @@ app.post('/api/task/sortOrdTask', (req, res) => {
 	mongoose.connect(url, { useNewUrlParser: true }, function(err){
 		if(err) throw err;
 
-if (Number(req.body.dragOrder)>Number(req.body.dropOrder)){
+if ( Number(req.body.dragOrder) > Number(req.body.dropOrder) ){
 
-var ItemStartInc = Number(req.body.dragOrder)-1;
+var ItemStartInc = Number( req.body.dragOrder )-1;
 
 Todolist.find({"_id": ObjectId(req.body.projId)}, function (err, todos){
 todos.forEach(function(doc) {
-//console.log(doc); 
-// console.log(doc.name);
 	for ( var i=0; i < doc.tasks.length; i++ ) {
 		if ( doc.tasks[i].order <= ItemStartInc  &&  doc.tasks[i].order >= Number(req.body.dropOrder)) {
-            //doc.tasks[i].order++;
 
-/* console.log("ItemStartInc - "+ItemStartInc+
-	" req.body.dropOrder - "+req.body.dropOrder+
-	" doc.tasks[i].order -"+doc.tasks[i].order+
-	" doc.tasks[i].name - "+doc.tasks[i].name); */
+		var ItemInc = doc.tasks[i].order+1;
 
-var ItemInc = doc.tasks[i].order+1;
- /*console.log("---- doc._id - "+doc._id+
-		" doc.tasks[i]._id - "+doc.tasks[i]._id+
-		" doc.tasks[i].order - "+doc.tasks[i].order);
-*/
 		Todolist.update(
 			{ "_id": ObjectId(doc._id), "tasks._id": ObjectId(doc.tasks[i]._id) },
 			{ "$set": { "tasks.$.order": ItemInc } },
 			(err, doc) => {
 				if(err) throw err;
-				/*return res.status(200).json({
-					status: 'success',
-					data: doc
-			})*/}
+			}
 		);
 		}
 	}
 //---
- /*console.log("---- req.body.projId - "+req.body.projId+
-		" req.body.dragId - "+req.body.dragId+
-		" req.body.dropOrder - "+req.body.dropOrder);
-*/
 	Todolist.update(
 		{ "_id": ObjectId(req.body.projId), "tasks._id": ObjectId(req.body.dragId) },
 		{ "$set": { "tasks.$.order": Number(req.body.dropOrder) } },
@@ -385,48 +353,27 @@ var ItemInc = doc.tasks[i].order+1;
 })
 });
 
-
 } else {
 //---
 var ItemStartInc = Number(req.body.dragOrder)+1;
 
 Todolist.find({"_id": ObjectId(req.body.projId)}, function (err, todos){
 todos.forEach(function(doc) {
-//console.log(doc); 
-// console.log(doc.name);
 	for ( var i=0; i < doc.tasks.length; i++ ) {
 		if ( doc.tasks[i].order >= ItemStartInc  &&  doc.tasks[i].order <= Number(req.body.dropOrder)) {
-            //doc.tasks[i].order++;
 
-
-/* console.log("ItemStartInc - "+ItemStartInc+
-	" req.body.dropOrder - "+req.body.dropOrder+
-	" doc.tasks[i].order -"+doc.tasks[i].order+
-	" doc.tasks[i].name - "+doc.tasks[i].name); */
-
-var ItemInc = doc.tasks[i].order-1;
- console.log("---- doc._id - "+doc._id+
-		" doc.tasks[i]._id - "+doc.tasks[i]._id+
-		" doc.tasks[i].order - "+doc.tasks[i].order);
+		var ItemInc = doc.tasks[i].order-1;
 
 		Todolist.update(
 			{ "_id": ObjectId(doc._id), "tasks._id": ObjectId(doc.tasks[i]._id) },
 			{ "$set": { "tasks.$.order": ItemInc } },
 			(err, doc) => {
 				if(err) throw err;
-				/*return res.status(200).json({
-					status: 'success',
-
-					data: doc
-			})*/}
+			}
 		);
 		}
 	}
 //---
-/* console.log("---- req.body.projId - "+req.body.projId+
-		" req.body.dragId - "+req.body.dragId+
-		" req.body.dropOrder - "+req.body.dropOrder);
-*/
 	Todolist.update(
 		{ "_id": ObjectId(req.body.projId), "tasks._id": ObjectId(req.body.dragId) },
 		{ "$set": { "tasks.$.order": Number(req.body.dropOrder) } },

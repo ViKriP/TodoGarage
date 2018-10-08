@@ -201,16 +201,16 @@ try {
 	var dTsk = new Date(tsk.deadline);	
 if (tsk.status == "0") {
 	if (dNow > dTsk){
-//return new Date().toISOString();
-//return new Date().toString();
-//	this.editTaskCheck("0", task, proj_id)
+		//return new Date().toISOString();
+		//return new Date().toString();
+		//this.editTaskCheck("0", task, proj_id)
 
     this.showTodoService.dateExpired(prId,tsk._id).subscribe(res => {
-	//this.getAllTodolist();
+		//this.getAllTodolist();
 	console.log('dateExpired - ', res)
-      //this.closeBtnTask.nativeElement.click();
+		//this.closeBtnTask.nativeElement.click();
 	})
-//return (prId +" "+ tsk._id +" "+ tsk.deadline);
+		//return (prId +" "+ tsk._id +" "+ tsk.deadline);
 	} else {
 		//return false;
 	}
@@ -220,24 +220,15 @@ if (tsk.status == "0") {
 //----
 
   TaskDrag(tsk) {
-//console.log(e.dragData[0].name+" - "+e.dragData[1]);
-///console.log("Ok - "+tsk.name+" ord - "+tsk.order);
-//this.TskDrop = tsk;
-    //this.list1.push(e.dragData);
-    //this.removeItem(e.dragData, this.list2)
+	//console.log(e.dragData[0].name+" - "+e.dragData[1]);
+	///console.log("Ok - "+tsk.name+" ord - "+tsk.order);
   }
 
   TaskDrop(e: DropEvent,tsk) {
-//console.log(e);
-//console.log("drag - "+e.dragData[0].name+" - "+e.dragData[1]+" - "+tsk.name);
-//console.log("Ok - "+tsk.name+" ord - "+tsk.order);
 
 	this.showTodoService.sortOrdTask(e,tsk).subscribe(res =>{
-		//this.task.order = 4;
-				//this.closeBtnTask.nativeElement.click();
-	this.getAllTodolist();
-	this.commonService.notifyTodolistAddition();
-	//console.log('Task_SORT_order - ',res);
+		this.getAllTodolist();
+		this.commonService.notifyTodolistAddition();
 	});
 
   }
